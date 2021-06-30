@@ -1,6 +1,7 @@
 const scoreHG = document.querySelector(".score"),
     word = document.querySelector(".word"),
-    input = document.querySelector(".input")
+    input = document.querySelector(".input"),
+    button = document.querySelector(".button")
 
 const words = [
     'sigh', 'tense', 'airplane', 'ball', 'pies',
@@ -11,8 +12,6 @@ const words = [
 
 let randomWord, score = 0
 
-wordToDow()
-
 input.addEventListener('input', e => {
     const insertedText = e.target.value
 
@@ -22,6 +21,13 @@ input.addEventListener('input', e => {
         e.target.value = ''
     }
 })
+
+function startGame() {
+    button.style.display = "none"
+    wordToDow()
+    input.style.visibility = "visible"
+    input.focus()
+}
 
 function wordToDow() {
     randomWord = words[Math.floor(Math.random() * words.length)]
