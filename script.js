@@ -10,28 +10,49 @@ const words = [
     'eight', 'feeble', 'admit', 'drag', 'loving'
 ]
 
-let randomWord, score = 0
+let boxRandom = [],
+    score = 0, turn = 0
+
 
 input.addEventListener('input', e => {
     const insertedText = e.target.value
 
-    if (insertedText === randomWord) {
-        wordToDow()
+    if (insertedText === words[randomNumber]) {
+        turn++
+
+        wordToDOM()
         updateScore()
+
         e.target.value = ''
     }
 })
 
+
 function startGame() {
+    wordToDOM()
     button.style.display = "none"
-    wordToDow()
     input.style.visibility = "visible"
     input.focus()
 }
 
-function wordToDow() {
-    randomWord = words[Math.floor(Math.random() * words.length)]
-    word.innerHTML = randomWord
+function wordToDOM() {
+    if (turn < 1) {
+        randomNumber = Math.floor(Math.random() * words.length)
+        boxRandom.push(randomNumber)
+
+        word.innerHTML = words[randomNumber]
+    } else {
+        noRepeat()
+    }
+}
+
+function noRepeat() {
+    while (boxRandom.indexOf(randomNumber) > -1) { // exists randomNumber repeats
+        randomNumber = Math.floor(Math.random() * words.length)
+    }
+
+    boxRandom.push(randomNumber)
+    word.innerHTML = words[randomNumber]
 }
 
 function updateScore() {
