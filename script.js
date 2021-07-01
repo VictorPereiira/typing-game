@@ -1,7 +1,11 @@
-const scoreHG = document.querySelector(".score"),
+const scoreHG = document.getElementById("score"),
+    timeHG = document.getElementById("time"),
     word = document.querySelector(".word"),
     input = document.querySelector(".input"),
-    button = document.querySelector(".button")
+    button = document.querySelector(".button"),
+    container = document.querySelector(".container"),
+    gameOverHG = document.querySelector(".gameOver")
+
 
 const words = [
     [
@@ -20,7 +24,7 @@ const words = [
 
 let boxRandom = [], randomWord,
     lang, pt = 'pt', en = 'en',
-    score = 0, turn = 0
+    timeInterval, score = 0, turn = 0, time = 10
 
 button.innerHTML = "<button onclick='setToLanguage()'>Start Game</button>"
 
@@ -40,8 +44,9 @@ input.addEventListener('input', e => {
 
 
 function startGame() {
-    input.style.visibility = "visible"
     wordToDOM()
+    container.style.display = "block"
+    timeInterval = setInterval(updateTime, 1000)
     input.focus()
 }
 
@@ -89,4 +94,33 @@ function noRepeat() {
 function updateScore() {
     score++
     scoreHG.innerHTML = score
+}
+
+function updateTime() {
+    time--
+    timeHG.innerHTML = time + 's'
+
+    if (time === 0) {
+        clearInterval(timeInterval)
+        gameOver()
+    }
+}
+
+function gameOver() {
+    container.style.display = 'none'
+
+    gameOverHG.innerHTML =
+        `<h2>GAME OVER</h2>
+        <p>Your score was: ${score}</p>
+        <button onclick='resetGame()'>Reset Game</button>`
+}
+
+function resetGame() {
+    gameOverHG.innerHTML = ''
+
+    score = 0
+    turn = 0
+    time = 10
+
+    setToLanguage()
 }
