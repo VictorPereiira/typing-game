@@ -22,9 +22,8 @@ const words = [
     ]
 ]
 
-let boxRandom = [], randomWord,
-    lang, pt = 'pt', en = 'en',
-    timeInterval, score = 0, turn = 0, time = 10
+let boxRandom = [], randomWord, lang, diff,
+    timeInterval, SpeedTime, score = 0, turn = 0, time = 10
 
 button.innerHTML = "<button onclick='setToLanguage()'>Start Game</button>"
 
@@ -34,11 +33,14 @@ input.addEventListener('input', e => {
 
     if (insertedText === randomWord) {
         turn++
-
+        checkLengthBoxRadom()
         wordToDOM()
         updateScore()
-
         e.target.value = ''
+
+        if (SpeedTime === 1000) time += 2
+        if (SpeedTime === 600) time += 3
+        if (SpeedTime === 300) time += 5 
     }
 })
 
@@ -46,16 +48,15 @@ input.addEventListener('input', e => {
 function startGame() {
     wordToDOM()
     container.style.display = "block"
-    timeInterval = setInterval(updateTime, 1000)
+    timeInterval = setInterval(updateTime, SpeedTime)
     input.focus()
 }
-
 
 function setToLanguage() {
     button.innerHTML =
         `<h2>Choose a language </h2>
-        <button onclick='setIdiom( ${en} )'>en</button>
-        <button onclick='setIdiom( ${pt} )'>pt</button>`
+        <button onclick="setIdiom( 'en' )">en</button>
+        <button onclick="setIdiom( 'pt' )">pt</button>`
 }
 
 function setIdiom(idiom) {
@@ -64,7 +65,29 @@ function setIdiom(idiom) {
     if (idiom === 'en') lang = 0
     if (idiom === 'pt') lang = 1
 
+    giveDifficulty()
+}
+
+function giveDifficulty (){
+    button.innerHTML =  
+        `<h2>Choose a Difficulty</h2>
+        <button onclick="setDifficulty( 0 )">Medium</button>
+        <button onclick="setDifficulty( 1 )">Hard</button>
+        <button onclick="setDifficulty( 2 )">Expert</button>`
+}
+
+function setDifficulty(difficulty) {
+    button.innerHTML = ''
+
+    if (difficulty === 0) SpeedTime = 1000 ;
+    if (difficulty === 1) SpeedTime = 600 ;
+    if (difficulty === 2) SpeedTime = 300 ;
+
     startGame()
+}
+
+function checkLengthBoxRadom() {
+    if (boxRandom.length === words[lang].length) boxRandom.splice(0, Number.MAX_VALUE)
 }
 
 function wordToDOM() {
@@ -110,17 +133,18 @@ function gameOver() {
     container.style.display = 'none'
 
     gameOverHG.innerHTML =
-        `<h2>GAME OVER</h2>
+        `<h2>Time ran out</h2>
         <p>Your score was: ${score}</p>
         <button onclick='resetGame()'>Reset Game</button>`
 }
 
 function resetGame() {
     gameOverHG.innerHTML = ''
-
+    scoreHG.innerHTML = ''
+    timeHG.innerHTML = ''
     score = 0
     turn = 0
     time = 10
-
+    input.value = ''
     setToLanguage()
 }
