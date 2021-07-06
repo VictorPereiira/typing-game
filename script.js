@@ -2,7 +2,8 @@ const scoreHG = document.getElementById("score"),
     timeHG = document.getElementById("time"),
     word = document.querySelector(".word"),
     input = document.querySelector(".input"),
-    button = document.querySelector(".button"),
+    drawingArea = document.querySelector(".drawingArea"),
+    settings = document.querySelector(".settings"),
     container = document.querySelector(".container"),
     gameOverHG = document.querySelector(".gameOver")
 
@@ -22,11 +23,11 @@ const words = [
     ]
 ]
 
-let boxRandom = [], randomWord, lang, diff,
-    timeInterval, SpeedTime, score = 0, turn = 0, time = 10
+let boxRandom = [], randomWord, lang,
+    timeInterval, SpeedTime,
+    score = 0, turn = 0, time = 10
 
-button.innerHTML = "<button onclick='setToLanguage()'>Start Game</button>"
-
+drawingArea.innerHTML = "<button onclick='initGame()'>Start Game</button>"
 
 input.addEventListener('input', e => {
     const insertedText = e.target.value
@@ -38,38 +39,51 @@ input.addEventListener('input', e => {
         updateScore()
         e.target.value = ''
 
-        if (SpeedTime === 1000) time += 2
-        if (SpeedTime === 600) time += 3
-        if (SpeedTime === 300) time += 5 
+        if (speedTime === 1000) time += 2
+        if (speedTime === 600) time += 3
+        if (speedTime === 300) time += 5
     }
 })
 
 
+function initGame() {
+    if (localStorage.getItem('speedTime') === null) setToLanguage()
+    else {
+        lang = localStorage.getItem('lang')
+        speedTime = localStorage.getItem('speedTime')
+        startGame()
+    }
+}
+
 function startGame() {
+    settings.innerHTML = `<button onclick='config()'>Settings</button>`
+    drawingArea.innerHTML = ''
+
     wordToDOM()
     container.style.display = "block"
-    timeInterval = setInterval(updateTime, SpeedTime)
+    timeInterval = setInterval(updateTime, speedTime)
     input.focus()
 }
 
 function setToLanguage() {
-    button.innerHTML =
+    drawingArea.innerHTML =
         `<h2>Choose a language </h2>
-        <button onclick="setIdiom( 'en' )">en</button>
-        <button onclick="setIdiom( 'pt' )">pt</button>`
+        <button onclick="setIdiom( 'en' )">EN</button>
+        <button onclick="setIdiom( 'pt' )">PT</button>`
 }
 
 function setIdiom(idiom) {
-    button.innerHTML = ''
+    drawingArea.innerHTML = ''
 
     if (idiom === 'en') lang = 0
     if (idiom === 'pt') lang = 1
 
+    localStorage.setItem('lang', lang)
     giveDifficulty()
 }
 
-function giveDifficulty (){
-    button.innerHTML =  
+function giveDifficulty() {
+    drawingArea.innerHTML =
         `<h2>Choose a Difficulty</h2>
         <button onclick="setDifficulty( 0 )">Medium</button>
         <button onclick="setDifficulty( 1 )">Hard</button>
@@ -77,12 +91,12 @@ function giveDifficulty (){
 }
 
 function setDifficulty(difficulty) {
-    button.innerHTML = ''
 
-    if (difficulty === 0) SpeedTime = 1000 ;
-    if (difficulty === 1) SpeedTime = 600 ;
-    if (difficulty === 2) SpeedTime = 300 ;
+    if (difficulty === 0) speedTime = 1000;
+    if (difficulty === 1) speedTime = 600;
+    if (difficulty === 2) speedTime = 300;
 
+    localStorage.setItem('speedTime', speedTime)
     startGame()
 }
 
@@ -114,6 +128,48 @@ function noRepeat() {
     word.innerHTML = randomWord
 }
 
+function config() {
+    console.log('settings: on')
+
+    settings.innerHTML =
+        `<button onclick=configDifficulty()>Difficulty</button>
+        <button onclick=configLanguage()>Language</button>`
+
+}
+
+function configDifficulty() {
+    settings.innerHTML =
+        `<form id="settings-form">
+            <label for="difficulty">Difficulty</label>
+            <select id="difficulty">
+                <option value="1000">Medium</option>
+                <option value="600">Hard</option>
+                <option value="300">Expert</option>
+            </select>
+        </form>`
+
+    settings.addEventListener('change', e => {
+        difficulty = e.target.value
+        localStorage.setItem('speedTime', difficulty)
+    })
+}
+
+function configLanguage() {
+    settings.innerHTML =
+        `<form id="settings-form">
+            <label for="language">Language</label>
+            <select id="language">
+                <option value="0">EN</option>
+                <option value="1">PT</option>
+            </select>
+        </form>`
+
+    settings.addEventListener('change', e => {
+        language = e.target.value
+        localStorage.setItem('lang', language)
+    })
+}
+
 function updateScore() {
     score++
     scoreHG.innerHTML = score
@@ -133,12 +189,13 @@ function gameOver() {
     container.style.display = 'none'
 
     gameOverHG.innerHTML =
-        `<h2>Time ran out</h2>
+        `<h2>Time ran out</h2 >
         <p>Your score was: ${score}</p>
-        <button onclick='resetGame()'>Reset Game</button>`
+        <button onclick='resetGame()'>New Game</button>`
 }
 
 function resetGame() {
+    boxRandom.splice(0, Number.MAX_VALUE)
     gameOverHG.innerHTML = ''
     scoreHG.innerHTML = ''
     timeHG.innerHTML = ''
@@ -146,5 +203,5 @@ function resetGame() {
     turn = 0
     time = 10
     input.value = ''
-    setToLanguage()
+    initGame()
 }
