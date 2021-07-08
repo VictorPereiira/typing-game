@@ -24,8 +24,9 @@ const words = [
 ]
 
 let boxRandom = [], randomWord, lang,
-    timeInterval, SpeedTime,
-    score = 0, turn = 0, time = 10
+    timeInterval, speedTime, speedTimeTemp,
+    score = 0, turn = 0, time = 10,
+    endGame = false
 
 drawingArea.innerHTML = "<button onclick='initGame()'>Start Game</button>"
 
@@ -56,14 +57,15 @@ function initGame() {
 }
 
 function startGame() {
-    settings.innerHTML = `<button onclick='config()'>Settings</button>`
+    settings.innerHTML = `<button onclick='config(); pause()'>Settings</button>`
     drawingArea.innerHTML = ''
 
     wordToDOM()
     container.style.display = "block"
-    timeInterval = setInterval(updateTime, speedTime)
+    if (time > 0) timeInterval = setInterval(updateTime, speedTime)
     input.focus()
 }
+
 
 function setToLanguage() {
     drawingArea.innerHTML =
@@ -91,13 +93,14 @@ function giveDifficulty() {
 }
 
 function setDifficulty(difficulty) {
-
     if (difficulty === 0) speedTime = 1000;
     if (difficulty === 1) speedTime = 600;
     if (difficulty === 2) speedTime = 300;
 
-    localStorage.setItem('speedTime', speedTime)
-    startGame()
+    if (localStorage.getItem('speedTime') === null) {
+        localStorage.setItem('speedTime', speedTime)
+        startGame()
+    }
 }
 
 function checkLengthBoxRadom() {
@@ -128,45 +131,46 @@ function noRepeat() {
     word.innerHTML = randomWord
 }
 
-function config() {
-    console.log('settings: on')
-
-    settings.innerHTML =
-        `<button onclick=configDifficulty()>Difficulty</button>
-        <button onclick=configLanguage()>Language</button>`
-
+function pause() {
+    clearInterval(timeInterval)
+    speedTimeTemp = localStorage.getItem('speedTime')
 }
 
-function configDifficulty() {
+function config() {
+    let diff, idm
+
     settings.innerHTML =
-        `<form id="settings-form">
+        `<form action="">
             <label for="difficulty">Difficulty</label>
             <select id="difficulty">
                 <option value="1000">Medium</option>
                 <option value="600">Hard</option>
                 <option value="300">Expert</option>
             </select>
-        </form>`
-
-    settings.addEventListener('change', e => {
-        difficulty = e.target.value
-        localStorage.setItem('speedTime', difficulty)
-    })
-}
-
-function configLanguage() {
-    settings.innerHTML =
-        `<form id="settings-form">
             <label for="language">Language</label>
             <select id="language">
                 <option value="0">EN</option>
                 <option value="1">PT</option>
             </select>
+            <button type="submit">Save</button>
         </form>`
 
-    settings.addEventListener('change', e => {
-        language = e.target.value
-        localStorage.setItem('lang', language)
+    diff = document.querySelector('#difficulty')
+    idm = document.querySelector('#language')
+
+    setDifficulty(diff.value)
+
+    diff.value = localStorage.getItem('speedTime')
+    idm.value = localStorage.getItem('lang')
+
+    settings.addEventListener('submit', e => {
+        event.preventDefault()
+        settings.innerHTML = `<button onclick='config(); pause()'>Settings</button>`
+
+        if (time > 0) timeInterval = setInterval(updateTime, speedTimeTemp)
+
+        localStorage.setItem('speedTime', diff.value)
+        localStorage.setItem('lang', idm.value)
     })
 }
 
@@ -176,16 +180,19 @@ function updateScore() {
 }
 
 function updateTime() {
-    time--
-    timeHG.innerHTML = time + 's'
+    if (!endGame) {
+        time--
+        timeHG.innerHTML = time + 's'
+    }
 
-    if (time === 0) {
+    if (time <= 0) {
         clearInterval(timeInterval)
         gameOver()
     }
 }
 
 function gameOver() {
+    endGame = true
     container.style.display = 'none'
 
     gameOverHG.innerHTML =
@@ -197,8 +204,9 @@ function gameOver() {
 function resetGame() {
     boxRandom.splice(0, Number.MAX_VALUE)
     gameOverHG.innerHTML = ''
-    scoreHG.innerHTML = ''
-    timeHG.innerHTML = ''
+    scoreHG.innerHTML = '0'
+    timeHG.innerHTML = '10s'
+    endGame = false
     score = 0
     turn = 0
     time = 10
