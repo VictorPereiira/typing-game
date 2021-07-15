@@ -22,28 +22,36 @@ const words = [
     ]
 ]
 
-const draw =
-    `<form action="">
-        <label for="difficulty">Difficulty</label>
-        <select id="difficulty">
-            <option value="1000">Medium</option>
-            <option value="600">Hard</option>
-            <option value="300">Expert</option>
-        </select>
-        <label for="language">Language</label>
-        <select id="language">
-            <option value="0">EN</option>
-            <option value="1">PT</option>
-        </select>
-        <button type="submit">Save</button>
-    </form>`
-
+const draw = [
+    [
+        `<button onclick='initGame()'>Start Game</button>`
+    ],
+    [
+        `<form action="">
+            <label for="difficulty">Difficulty</label>
+            <select id="difficulty">
+                <option value="1000">Medium</option>
+                <option value="600">Hard</option>
+                <option value="300">Expert</option>
+            </select>
+            <label for="language">Language</label>
+            <select id="language">
+                <option value="0">EN</option>
+                <option value="1">PT</option>
+            </select>
+            <button type="submit">Save</button>
+        </form>`
+    ],
+    [
+        `<button onclick='setConfigs()'>Settings</button>`
+    ]
+]
 let boxRandom = [], randomWord,
     timeInterval, speedTime, lang,
     score = 0, turn = 0, time = 10,
-    endGame = false
+    endGame = false, pause = false
 
-drawingArea.innerHTML = `<button onclick='initGame()'>Start Game</button>`
+drawingArea.innerHTML = draw[0]
 
 input.addEventListener('input', e => {
     const insertedText = e.target.value
@@ -63,43 +71,49 @@ input.addEventListener('input', e => {
 
 function initGame() {
     if (localStorage.getItem('speedTime') === null) {
-        setConfigs()
+        lang = 0
+        speedTime = 600
+        localStorage.setItem('lang', lang)
+        localStorage.setItem('speedTime', speedTime)
     } else {
         lang = Number(localStorage.getItem('lang'))
         speedTime = Number(localStorage.getItem('speedTime'))
-        startGame()
     }
+    startGame()
 }
 
 function startGame() {
-    drawingArea.innerHTML = `<button onclick='setConfigs()'>Settings</button>`
+    drawingArea.innerHTML = draw[2]
 
     wordToDOM()
     container.style.display = "block"
-    if (time > 0) timeInterval = setInterval(updateTime, speedTime)
+    timeInterval = setInterval(updateTime, speedTime)
     input.focus()
 }
 
 function setConfigs() {
     let diff, idm
-    drawingArea.innerHTML = draw
+    drawingArea.innerHTML = draw[1]
+    input.disabled = true
 
     diff = document.querySelector('#difficulty') // access variable
     idm = document.querySelector('#language')
 
     if (localStorage.getItem('speedTime') !== null) {
-        clearInterval(timeInterval)
         diff.value = localStorage.getItem('speedTime') // view selection historic 
         idm.value = localStorage.getItem('lang') // view selection historic 
+        pause = true
     }
 
     drawingArea.addEventListener('submit', e => {
-        event.preventDefault()
+        e.preventDefault()
+        drawingArea.innerHTML = draw[2]
+        input.disabled = false
 
+        pause = false
         speedTime = Number(diff.value)
         lang = Number(idm.value)
 
-        startGame()
         localStorage.setItem('speedTime', speedTime)
         localStorage.setItem('lang', lang)
     })
@@ -131,6 +145,7 @@ function updateScore() {
 }
 
 function updateTime() {
+    if (pause) return
     time--
     timeHG.innerHTML = time + 's'
 
