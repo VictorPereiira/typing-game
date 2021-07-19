@@ -1,4 +1,104 @@
-.container {
-    display : none;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", serif;
+    color: #DFDFE0
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #3B13AC;
+}
+
+.game {
+    text-align: center;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+    width: 745.5px;
+    padding: 0 15px 10px 15px;
+    border-bottom: 1px #fff solid;
+}
+
+.top div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.top .timer {
+    align-items: center;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.word {
+    margin: 65.5px 0 10px 0;
+    font-size: 80px;
+}
+
+.score_container{
+    font-size: 30px;
+}
+
+.input {
+    width: 400px;
+    height: 37px;
+    
+    display: block;
+    margin: 20px auto 0 auto;
+    padding: 10px;
+    margin-top: 73px;
+
+    outline: none;
+    background: none;
+    border: 1px solid #DFDFE0;
+    border-radius: 15px;
+
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.drawingArea button, .gameOver button{
+    background: #491BC7;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+    height: 37px;
+    width: 140px;
+    
+    margin-top: 36px;
+    border-radius: 20px;
+    border: none;
+
+    cursor: pointer;
+    transition: 0.3s ease-out;
+
+    font-size: 12px;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+#settings-icon {
+    display: none;
+    position: absolute;
+    top: 576px;
+    left: 38px;
+    cursor: pointer;
+}
+
+#clock-icon {
+    margin-left: 5px;
+}
+
+.menu-icon {
+    margin-left: 22px;
+    cursor: pointer;
+}

@@ -3,6 +3,7 @@ const scoreHG = document.getElementById("score"),
     word = document.querySelector(".word"),
     input = document.querySelector(".input"),
     drawingArea = document.querySelector(".drawingArea"),
+    settingsIcon = document.querySelector("#settings-icon"),
     container = document.querySelector(".container"),
     gameOverHG = document.querySelector(".gameOver")
 
@@ -41,9 +42,6 @@ const draw = [
             </select>
             <button type="submit">Save</button>
         </form>`
-    ],
-    [
-        `<button onclick='setConfigs()'>Settings</button>`
     ]
 ]
 let boxRandom = [], randomWord,
@@ -52,6 +50,7 @@ let boxRandom = [], randomWord,
     endGame = false, pause = false
 
 drawingArea.innerHTML = draw[0]
+input.disabled = true
 
 input.addEventListener('input', e => {
     const insertedText = e.target.value
@@ -69,6 +68,7 @@ input.addEventListener('input', e => {
     }
 })
 
+
 function initGame() {
     if (localStorage.getItem('speedTime') === null) {
         lang = 0
@@ -83,10 +83,12 @@ function initGame() {
 }
 
 function startGame() {
-    drawingArea.innerHTML = draw[2]
+    settingsIcon.style.display = 'block'
+    settingsIcon.addEventListener('click', setConfigs)
+    input.disabled = false
+    input.placeholder = ''
 
     wordToDOM()
-    container.style.display = "block"
     timeInterval = setInterval(updateTime, speedTime)
     input.focus()
 }
@@ -107,7 +109,6 @@ function setConfigs() {
 
     drawingArea.addEventListener('submit', e => {
         e.preventDefault()
-        drawingArea.innerHTML = draw[2]
         input.disabled = false
 
         pause = false
@@ -151,13 +152,13 @@ function updateTime() {
 
     if (time <= 0) {
         clearInterval(timeInterval)
+        input.disabled = true
+        input.value = ''
         gameOver()
     }
 }
 
 function gameOver() {
-    container.style.display = 'none'
-
     gameOverHG.innerHTML =
         `<h2>Time ran out</h2 >
         <p>Your score was: ${score}</p>
@@ -172,6 +173,5 @@ function resetGame() {
     score = 0
     turn = 0
     time = 10
-    input.value = ''
     initGame()
 }

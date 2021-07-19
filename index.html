@@ -6,24 +6,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/6e10fb7cbf.js" crossorigin="anonymous"></script>
     <title>Typing Game</title>
 </head>
 
 <body>
-    <div class="drawingArea"></div>
+    <div class="game">
+        <i class="fas fa-cog fa-2x" id="settings-icon"></i>
 
-    <div class="container">
-        <p class="score_container"> Score: <span id="score">0</span></p>
-        <p class="time_container"> Time: <span id="time">10s</span></p>
+        <div class="top">
+            <h1>Typing Game</h1>
+            <div>
+                <div class="timer">
+                    <p class="time_container"><span id="time">10s</span></p>
+                    <i class="far fa-clock" id="clock-icon"></i>
+                </div>
+                <img src="menu-icon.svg" class="menu-icon" alt="">
+            </div>
+        </div>
 
-        <p class="word"></p>
+        <p class="word">happiness</p>
+        <p class="score_container">
+            <img src="point-icon.svg" alt="">
+            <span id="score">0</span>
+        </p>
 
         <form>
-            <input class="input" type="text">
+            <input placeholder="write the word here!" class="input" type="text">
         </form>
+
+        <div class="drawingArea"></div>
+        <div class="gameOver"></div>
     </div>
 
-    <div class="gameOver"></div>
 
     <script src="script.js"></script>
 </body>
