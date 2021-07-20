@@ -8,17 +8,26 @@
     color: #DFDFE0
 }
 
-body {
+.game {
     display: flex;
-    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    
+    flex-direction: column;
     align-items: center;
+    text-align: center;
     background: #3B13AC;
 }
 
-.game {
-    text-align: center;
+.core#blur.active {
+    filter: blur(5px);
+    pointer-events: none;
+    user-select: none;
 }
 
+
+
+/* top area */
 .top {
     display: flex;
     justify-content: space-between;
@@ -39,6 +48,7 @@ body {
     font-weight: 500;
 }
 
+/* app core */
 .word {
     margin: 65.5px 0 10px 0;
     font-size: 80px;
@@ -67,13 +77,15 @@ body {
     font-weight: 700;
 }
 
-.drawingArea button, .gameOver button{
+
+/* drawingArea Button */
+.drawingArea button{
     background: #491BC7;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
     height: 37px;
     width: 140px;
     
-    margin-top: 36px;
+    margin: 33px auto 0 auto;
     border-radius: 20px;
     border: none;
 
@@ -86,11 +98,137 @@ body {
     text-transform: uppercase;
 }
 
+.drawingArea button:hover {
+    background: #5d22ff;
+}
+
+/* popup form settings */
+.drawingArea form, .endGame-container{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    
+    background: #DFDFE0;
+    width: 352px;
+    height: 384px;
+
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.drawingArea form .settings-title {
+    color: #717171;
+    padding-bottom: 12.5px;
+    margin-bottom: 41.5px;
+    border-bottom: 2px solid #CACACA;
+
+    font-size: 22px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.drawingArea form #form-close-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    color: #717171;
+}
+
+.drawingArea .settings-controls div {
+    display: flex;
+    align-items: center;
+}
+
+.drawingArea .settings-controls div:first-child {
+    margin-bottom: 18px;
+}
+
+.drawingArea .settings-controls div p {
+    padding: 0 7px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #8C8C8C;
+}
+
+.drawingArea .settings-controls select {
+    position: absolute;
+    left: 130px;
+    
+    background: #D7D7D7;
+    width: 100px;
+    height: 30px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 7px 0;
+    cursor: pointer;
+
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+    color: #9C9C9C;
+}
+
+.drawingArea form .settings-controls select option {
+    color: #9C9C9C;
+    margin-left: 30px;
+}
+
+.drawingArea form .button-newGame {
+    margin-top: 95px;
+    background:#F5C00D;
+}
+
+.drawingArea form .button-newGame:hover {
+    background:#f5e60d;
+}
+
+.drawingArea form .button-Save {
+    margin-top: 15px;
+}
+
+
+/* drawingArea endGame-container */
+.drawingArea .endGame-container h2{
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #717171;
+}
+
+.drawingArea .endGame-container p {
+    display: flex;
+    width: 280px;
+    justify-content: space-between;
+    margin: 0 auto 7px auto;
+}
+
+.drawingArea .endGame-container p, 
+.drawingArea .endGame-container span,
+.drawingArea .endGame-container .points-container  {
+    font-size: 18px;
+    font-weight: 500;
+    color: #717171;
+}
+
+.drawingArea .endGame-container .points-container {
+    width: 86px;
+    margin: 21px auto 0 auto;
+}
+
+.drawingArea .endGame-container .points-value {
+    font-size: 50px;
+}
+
+/* Icons */
 #settings-icon {
     display: none;
     position: absolute;
-    top: 576px;
     left: 38px;
+    bottom: 51px;
     cursor: pointer;
 }
 

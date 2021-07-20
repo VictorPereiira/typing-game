@@ -1,11 +1,11 @@
-const scoreHG = document.getElementById("score"),
+const typedWordsHG = document.getElementById("typedWords"),
     timeHG = document.getElementById("time"),
     word = document.querySelector(".word"),
     input = document.querySelector(".input"),
     drawingArea = document.querySelector(".drawingArea"),
     settingsIcon = document.querySelector("#settings-icon"),
     container = document.querySelector(".container"),
-    gameOverHG = document.querySelector(".gameOver")
+    blurArea = document.querySelector("#blur")
 
 
 const words = [
@@ -25,28 +25,38 @@ const words = [
 
 const draw = [
     [
-        `<button onclick='initGame()'>Start Game</button>`
+        `<button class="button-startGame"onclick='initGame()'>Start Game</button>`
     ],
     [
         `<form action="">
-            <label for="difficulty">Difficulty</label>
-            <select id="difficulty">
-                <option value="1000">Medium</option>
-                <option value="600">Hard</option>
-                <option value="300">Expert</option>
-            </select>
-            <label for="language">Language</label>
-            <select id="language">
-                <option value="0">EN</option>
-                <option value="1">PT</option>
-            </select>
-            <button type="submit">Save</button>
+            <i class="fas fa-times" id="form-close-icon"></i>
+            <p class="settings-title">Settings</p>
+            <div class="settings-controls">
+                <div>
+                    <p for="language">Language</p>
+                    <select id="language">
+                        <option value="0">En</option>
+                        <option value="1">Pt</option>
+                    </select>
+                </div>
+                <div>
+                    <p for="difficulty">Difficulty</p>
+                    <select id="difficulty" class="firstSelect">
+                        <option value="1000">Medium</option>
+                        <option value="600">Hard</option>
+                        <option value="300">Expert</option>
+                    </select>
+                </div>
+            </div>
+            <button class="button-newGame">New Game</button>
+            <button class="button-Save"type="submit">Save</button>   
         </form>`
     ]
 ]
+
 let boxRandom = [], randomWord,
     timeInterval, speedTime, lang,
-    score = 0, turn = 0, time = 10,
+    typedWords = 0, turn = 0, time = 10,
     endGame = false, pause = false
 
 drawingArea.innerHTML = draw[0]
@@ -57,7 +67,7 @@ input.addEventListener('input', e => {
 
     if (insertedText === randomWord) {
         turn++
-        updateScore()
+        updateTypedWords()
         checkLengthBoxRadom()
         wordToDOM()
         e.target.value = ''
@@ -67,7 +77,6 @@ input.addEventListener('input', e => {
         if (speedTime === 300) time += 5
     }
 })
-
 
 function initGame() {
     if (localStorage.getItem('speedTime') === null) {
@@ -83,8 +92,10 @@ function initGame() {
 }
 
 function startGame() {
+    drawingArea.innerHTML = ''
     settingsIcon.style.display = 'block'
     settingsIcon.addEventListener('click', setConfigs)
+
     input.disabled = false
     input.placeholder = ''
 
@@ -96,27 +107,47 @@ function startGame() {
 function setConfigs() {
     let diff, idm
     drawingArea.innerHTML = draw[1]
-    input.disabled = true
+    settingsIcon.style.display = 'none'
+    pause = true
+    setBlur()
 
-    diff = document.querySelector('#difficulty') // access variable
-    idm = document.querySelector('#language')
+    idm = document.querySelector('#language') // access variables
+    diff = document.querySelector('#difficulty')
 
-    if (localStorage.getItem('speedTime') !== null) {
-        diff.value = localStorage.getItem('speedTime') // view selection historic 
-        idm.value = localStorage.getItem('lang') // view selection historic 
-        pause = true
-    }
+    idm.value = localStorage.getItem('lang') // view selection historic
+    diff.value = localStorage.getItem('speedTime')
+
+    document.querySelector('#form-close-icon')
+        .addEventListener('click', () => {
+            settingsIcon.style.display = 'block'
+            drawingArea.innerHTML = ''
+            pause = false
+            input.focus()
+            setBlur()
+        })
+
+    document.querySelector('.button-newGame')
+        .addEventListener('click', () => {
+            clearInterval(timeInterval)
+            pause = false
+            input.value = ''
+
+            localStorage.setItem('lang', idm.value)
+            localStorage.setItem('speedTime', diff.value)
+            input.focus()
+            resetGame()
+        })
 
     drawingArea.addEventListener('submit', e => {
         e.preventDefault()
-        input.disabled = false
-
+        settingsIcon.style.display = 'block'
+        drawingArea.innerHTML = ''
         pause = false
-        speedTime = Number(diff.value)
-        lang = Number(idm.value)
+        input.focus()
+        setBlur()
 
-        localStorage.setItem('speedTime', speedTime)
-        localStorage.setItem('lang', lang)
+        localStorage.setItem('lang', idm.value)
+        localStorage.setItem('speedTime', diff.value)
     })
 }
 
@@ -140,9 +171,9 @@ function wordToDOM() {
     word.innerHTML = randomWord
 }
 
-function updateScore() {
-    score++
-    scoreHG.innerHTML = score
+function updateTypedWords() {
+    typedWords++
+    typedWordsHG.innerHTML = typedWords
 }
 
 function updateTime() {
@@ -151,27 +182,74 @@ function updateTime() {
     timeHG.innerHTML = time + 's'
 
     if (time <= 0) {
+        settingsIcon.style.display = 'none'
         clearInterval(timeInterval)
-        input.disabled = true
         input.value = ''
+        endGame = true
+        setBlur()
         gameOver()
     }
 }
 
+function setBlur() {
+    blurArea.classList.toggle('active')
+}
+
+function viewPopupMenu() {
+    if (time > 0) settingsIcon.style.display = 'none'
+    pause = true
+    setBlur()
+
+    drawingArea.innerHTML =
+        `<div class="menu-container">
+            <i class="fas fa-times" id="menu-close-icon"></i>
+            <h2>Statistics</h2>
+
+            <p>Game Time <span>...</span></p>
+            <p>Rounds <span>...</span></p>
+            <p>Hit Average <span>...</span></p>
+        <div>`
+
+    document.querySelector('#menu-close-icon')
+        .addEventListener('click', () => {
+            if (timeInterval === undefined) drawingArea.innerHTML = draw[0]
+            else {
+                drawingArea.innerHTML = ''
+                settingsIcon.style.display = 'block'
+                pause = false
+                input.focus()
+            }
+            setBlur()
+        })
+}
+
 function gameOver() {
-    gameOverHG.innerHTML =
-        `<h2>Time ran out</h2 >
-        <p>Your score was: ${score}</p>
-        <button onclick='resetGame()'>New Game</button>`
+    drawingArea.innerHTML =
+        `<div class="endGame-container">
+            <h2>Time ran out</h2 >
+
+            <p>Time Played: <span>...</span></p>
+            <p>Error Rate: <span>...</span></p>
+            <p>Difficulty: <span>...</span></p>
+            <p>Typed Words: <span>${typedWords}</span></p>
+
+            <div class="points-container">
+                <span>Points: </span> 
+                <span class="points-value">${typedWords}</span>
+            </div>
+
+            <button onclick='resetGame()'>New Game</button>
+        </div>`
 }
 
 function resetGame() {
     boxRandom.splice(0, Number.MAX_VALUE)
-    gameOverHG.innerHTML = ''
-    scoreHG.innerHTML = '0'
+    typedWordsHG.innerHTML = '0'
     timeHG.innerHTML = '10s'
-    score = 0
+    endGame = false
+    typedWords = 0
     turn = 0
     time = 10
+    setBlur()
     initGame()
 }
