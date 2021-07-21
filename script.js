@@ -181,6 +181,7 @@ function updateTime() {
     time--
     timeHG.innerHTML = time + 's'
 
+
     if (time <= 0) {
         settingsIcon.style.display = 'none'
         clearInterval(timeInterval)
@@ -197,17 +198,19 @@ function setBlur() {
 
 function viewPopupMenu() {
     if (time > 0) settingsIcon.style.display = 'none'
-    pause = true
+    if (timeInterval !== undefined) pause = true
     setBlur()
 
     drawingArea.innerHTML =
         `<div class="menu-container">
             <i class="fas fa-times" id="menu-close-icon"></i>
-            <h2>Statistics</h2>
+            <p class="statistics-title">Statistics</p>
 
-            <p>Game Time <span>...</span></p>
-            <p>Rounds <span>...</span></p>
-            <p>Hit Average <span>...</span></p>
+            <div class="menu-info">
+                <p>Game Time <span>...</span></p>
+                <p>Rounds <span>...</span></p>
+                <p>Hit Average <span>...</span></p>
+            </div>
         <div>`
 
     document.querySelector('#menu-close-icon')

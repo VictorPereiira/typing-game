@@ -26,7 +26,6 @@
 }
 
 
-
 /* top area */
 .top {
     display: flex;
@@ -102,8 +101,9 @@
     background: #5d22ff;
 }
 
-/* popup form settings */
-.drawingArea form, .endGame-container{
+/* popup container */
+.drawingArea form,
+.endGame-container {
     display: flex;
     position: absolute;
     flex-direction: column;
@@ -119,6 +119,7 @@
     border-radius: 10px;
 }
 
+/* drawingArea form */
 .drawingArea form .settings-title {
     color: #717171;
     padding-bottom: 12.5px;
@@ -222,6 +223,57 @@
 .drawingArea .endGame-container .points-value {
     font-size: 50px;
 }
+
+
+/* drawingArea menu-container */
+.menu-container p, 
+.menu-container span {
+    color: #717171;
+} 
+
+.menu-container {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    
+    background: #DFDFE0;
+    width: 352px;
+    height: 384px;
+
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.menu-container .statistics-title {
+    padding-bottom: 12.5px;
+    margin-bottom: 41.5px;
+    border-bottom: 2px solid #CACACA;
+
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.menu-container #menu-close-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    color: #717171;
+}
+
+.menu-container .menu-info p {
+    margin-bottom: 7px;
+}
+
+.menu-container .menu-info span {
+    position: absolute;
+    right: 30px;
+}
+
 
 /* Icons */
 #settings-icon {
