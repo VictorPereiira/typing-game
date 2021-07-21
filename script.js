@@ -7,7 +7,6 @@ const typedWordsHG = document.getElementById("typedWords"),
     container = document.querySelector(".container"),
     blurArea = document.querySelector("#blur")
 
-
 const words = [
     [
         'sigh', 'tense', 'airplane', 'ball', 'pies',
@@ -23,43 +22,76 @@ const words = [
     ]
 ]
 
-const draw = [
-    [
-        `<button class="button-startGame"onclick='initGame()'>Start Game</button>`
-    ],
-    [
-        `<form action="">
-            <i class="fas fa-times" id="form-close-icon"></i>
-            <p class="settings-title">Settings</p>
-            <div class="settings-controls">
-                <div>
-                    <p for="language">Language</p>
-                    <select id="language">
-                        <option value="0">En</option>
-                        <option value="1">Pt</option>
-                    </select>
-                </div>
-                <div>
-                    <p for="difficulty">Difficulty</p>
-                    <select id="difficulty" class="firstSelect">
-                        <option value="1000">Medium</option>
-                        <option value="600">Hard</option>
-                        <option value="300">Expert</option>
-                    </select>
-                </div>
-            </div>
-            <button class="button-newGame">New Game</button>
-            <button class="button-Save"type="submit">Save</button>   
-        </form>`
-    ]
-]
-
 let boxRandom = [], randomWord,
     timeInterval, speedTime, lang,
-    typedWords = 0, turn = 0, time = 10,
-    endGame = false, pause = false
+    endGame = false, pause = false,
+    turn = 0, time = 10
 
-drawingArea.innerHTML = draw[0]
+let gameTime = 0, rounds = 0, hitAverage = 0,
+    typedWords = 0, difficultyLevel, points = 0,
+    timePlayed = 0, timePlayedInt, timePlayedFormat
+
+function draw(drw) {
+    let drawing = [
+        [
+            `<button class="button-startGame"onclick='initGame()'>Start Game</button>`
+        ],
+        [
+            `<form action="">
+                    <i class="fas fa-times" id="form-close-icon"></i>
+                    <p class="settings-title">Settings</p>
+                    <div class="settings-controls">
+                        <div>
+                            <p for="language">Language</p>
+                            <select id="language">
+                                <option value="0">En</option>
+                                <option value="1">Pt</option>
+                            </select>
+                        </div>
+                        <div>
+                            <p for="difficulty">Difficulty</p>
+                            <select id="difficulty" class="firstSelect">
+                                <option value="1000">Medium</option>
+                                <option value="600">Hard</option>
+                                <option value="300">Expert</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="button-newGame">New Game</button>
+                    <button class="button-Save"type="submit">Save</button>   
+                </form>`
+        ],
+        [
+            `<div class="menu-container">
+                    <i class="fas fa-times" id="menu-close-icon"></i>
+                    <p class="statistics-title">Statistics</p>
+                    <div class="menu-info">
+                        <p>Game Time <span>...</span></p>
+                        <p>Rounds <span>...</span></p>
+                        <p>Hit Average <span>...</span></p>
+                    </div>
+                <div>`
+        ],
+        [
+            `<div class="endGame-container">
+                    <h2>Time ran out</h2 >
+                    <p>Time Played: <span>${timePlayedFormat}</span></p>
+                    <p>Error Rate: <span>...</span></p>
+                    <p>Difficulty: <span>${difficultyLevel}</span></p>
+                    <p>Typed Words: <span>${typedWords}</span></p>
+                    <div class="points-container">
+                        <span>Points: </span> 
+                        <span class="points-value">${points}</span>
+                    </div>
+                    <button onclick='resetGame()'>New Game</button>
+                </div>`
+        ]
+    ]
+
+    return drawing[drw]
+}
+
+drawingArea.innerHTML = draw(0)
 input.disabled = true
 
 input.addEventListener('input', e => {
@@ -94,19 +126,20 @@ function initGame() {
 function startGame() {
     drawingArea.innerHTML = ''
     settingsIcon.style.display = 'block'
-    settingsIcon.addEventListener('click', setConfigs)
 
     input.disabled = false
     input.placeholder = ''
 
     wordToDOM()
     timeInterval = setInterval(updateTime, speedTime)
+    timePlayedInt = setInterval(timePlayedUp, 1000)
+
     input.focus()
 }
 
 function setConfigs() {
     let diff, idm
-    drawingArea.innerHTML = draw[1]
+    drawingArea.innerHTML = draw(1)
     settingsIcon.style.display = 'none'
     pause = true
     setBlur()
@@ -155,6 +188,10 @@ function checkLengthBoxRadom() {
     if (boxRandom.length === words[lang].length) boxRandom.splice(0, Number.MAX_VALUE)
 }
 
+function setBlur() {
+    blurArea.classList.toggle('active')
+}
+
 function wordToDOM() {
     overall = words[lang].length
 
@@ -177,14 +214,16 @@ function updateTypedWords() {
 }
 
 function updateTime() {
+    console.log("Time");
     if (pause) return
+
     time--
     timeHG.innerHTML = time + 's'
-
 
     if (time <= 0) {
         settingsIcon.style.display = 'none'
         clearInterval(timeInterval)
+        clearInterval(timePlayedInt)
         input.value = ''
         endGame = true
         setBlur()
@@ -192,8 +231,28 @@ function updateTime() {
     }
 }
 
-function setBlur() {
-    blurArea.classList.toggle('active')
+function timePlayedUp() {
+    let minutes, seconds
+    timePlayed++
+
+    if (timePlayed <= 60) {
+        if (timePlayed < 10) timePlayedFormat = `00:00:0${timePlayed}`
+        else timePlayedFormat = `00:00:${timePlayed}`
+    }
+
+    if (timePlayed === 60) timePlayedFormat = `00:01:00`
+
+    if (timePlayed > 60) {
+        minutes = Math.floor(timePlayed / 60)
+        seconds = timePlayed % 60
+
+        if (minutes < 10) minutes = `0${minutes}`
+        if (seconds < 10) seconds = `0${seconds}`
+
+        timePlayedFormat = `00:${minutes}:${seconds}`
+    }
+
+    if (minutes === 60) timePlayedFormat = `01:00:00`
 }
 
 function viewPopupMenu() {
@@ -201,21 +260,11 @@ function viewPopupMenu() {
     if (timeInterval !== undefined) pause = true
     setBlur()
 
-    drawingArea.innerHTML =
-        `<div class="menu-container">
-            <i class="fas fa-times" id="menu-close-icon"></i>
-            <p class="statistics-title">Statistics</p>
-
-            <div class="menu-info">
-                <p>Game Time <span>...</span></p>
-                <p>Rounds <span>...</span></p>
-                <p>Hit Average <span>...</span></p>
-            </div>
-        <div>`
+    drawingArea.innerHTML = draw(2)
 
     document.querySelector('#menu-close-icon')
         .addEventListener('click', () => {
-            if (timeInterval === undefined) drawingArea.innerHTML = draw[0]
+            if (timeInterval === undefined) drawingArea.innerHTML = draw(0)
             else {
                 drawingArea.innerHTML = ''
                 settingsIcon.style.display = 'block'
@@ -227,22 +276,11 @@ function viewPopupMenu() {
 }
 
 function gameOver() {
-    drawingArea.innerHTML =
-        `<div class="endGame-container">
-            <h2>Time ran out</h2 >
+    if (speedTime === 1000) difficultyLevel = 'Medium'
+    if (speedTime === 600) difficultyLevel = 'Hard'
+    if (speedTime === 300) difficultyLevel = 'Expert'
 
-            <p>Time Played: <span>...</span></p>
-            <p>Error Rate: <span>...</span></p>
-            <p>Difficulty: <span>...</span></p>
-            <p>Typed Words: <span>${typedWords}</span></p>
-
-            <div class="points-container">
-                <span>Points: </span> 
-                <span class="points-value">${typedWords}</span>
-            </div>
-
-            <button onclick='resetGame()'>New Game</button>
-        </div>`
+    drawingArea.innerHTML = draw(3)
 }
 
 function resetGame() {
@@ -251,8 +289,11 @@ function resetGame() {
     timeHG.innerHTML = '10s'
     endGame = false
     typedWords = 0
+    timePlayed = 0
     turn = 0
     time = 10
     setBlur()
     initGame()
 }
+
+
