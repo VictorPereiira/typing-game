@@ -176,8 +176,10 @@ function setConfigs() {
     document.querySelector('.button-newGame')
         .addEventListener('click', () => {
             clearInterval(timeInterval)
+            clearInterval(timePlayedInt)
             pause = false
             input.value = ''
+            timePlayed = 0
 
             localStorage.setItem('lang', idm.value)
             localStorage.setItem('speedTime', diff.value)
@@ -187,14 +189,18 @@ function setConfigs() {
 
     drawingArea.addEventListener('submit', e => {
         e.preventDefault()
-        settingsIcon.style.display = 'block'
-        drawingArea.innerHTML = ''
-        pause = false
-        input.focus()
-        setBlur()
 
-        localStorage.setItem('lang', idm.value)
-        localStorage.setItem('speedTime', diff.value)
+        // if = prevent recall
+        if (pause === true) {
+            settingsIcon.style.display = 'block'
+            drawingArea.innerHTML = ''
+            pause = false
+            input.focus()
+
+            setBlur()
+            localStorage.setItem('lang', idm.value)
+            localStorage.setItem('speedTime', diff.value)
+        }
     })
 }
 
@@ -234,7 +240,7 @@ function updateTime() {
     time--
     timeHG.innerHTML = time + 's'
 
-    if (time <= 0) {
+    if (time < 1) {
         clearInterval(timeInterval)
         clearInterval(timePlayedInt)
         gameOver()
@@ -273,6 +279,30 @@ function setTimeFormat(timeValue) {
     return timeFormatted
 }
 
+function setPoints() {
+    if (turn > 0) {
+        if (difficultyLevel === 'Medium') setValuePoints(5, 2)
+        if (difficultyLevel === 'Hard') setValuePoints(10, 3)
+        if (difficultyLevel === 'Expert') setValuePoints(20, 5)
+
+        function setValuePoints(wordValue, roundTimeValue) {
+            points = typedWords * wordValue
+            points += timePlayed * roundTimeValue
+        }
+
+        // bonus for time played
+        if (timePlayed === 60) points += 50
+        if (timePlayed === 120) points += 100
+        if (timePlayed === 300) points += 200
+
+        // bonus for word typed
+        if (typedWords === 5) points += 20
+        if (typedWords === 15) points += 50
+        if (typedWords === boxRandom.length) points += 100
+    }
+}
+
+
 function viewPopupMenu() {
     if (time > 0) settingsIcon.style.display = 'none'
     if (timeInterval !== undefined) pause = true
@@ -294,24 +324,28 @@ function viewPopupMenu() {
 }
 
 function gameOver() {
-    gameTime += timePlayed
-    rounds++
+    if (turn > 0) {
+        gameTime += timePlayed
+        rounds++
 
-    // save value
-    localStorage.setItem('gameTime', gameTime)
-    localStorage.setItem('rounds', rounds)
+        // save value
+        localStorage.setItem('gameTime', gameTime)
+        localStorage.setItem('rounds', rounds)
 
-    // view values
-    gameTimeFormat = setTimeFormat(gameTime)
-    timePlayedFormat = setTimeFormat(timePlayed)
+        // view values
+        gameTimeFormat = setTimeFormat(gameTime)
+    }
 
     if (speedTime === 1000) difficultyLevel = 'Medium'
     if (speedTime === 600) difficultyLevel = 'Hard'
     if (speedTime === 300) difficultyLevel = 'Expert'
 
+    timePlayedFormat = setTimeFormat(timePlayed)
+
+    setPoints()
     setBlur()
     endGame = true
-    input.value = ''
+    pause = true
     settingsIcon.style.display = 'none'
     drawingArea.innerHTML = draw(3)
 }
@@ -320,9 +354,12 @@ function resetGame() {
     boxRandom.splice(0, Number.MAX_VALUE)
     typedWordsHG.innerHTML = '0'
     timeHG.innerHTML = '10s'
+    input.value = ''
     endGame = false
+    pause = false
     typedWords = 0
     timePlayed = 0
+    points = 0
     turn = 0
     time = 10
     setBlur()
