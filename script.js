@@ -27,7 +27,8 @@ let boxRandom = [], randomWord,
     endGame = false, pause = false,
     turn = 0, time = 10
 
-let gameTime = 0, rounds = 0, hitAverage = 0,
+let gameTime = 0, gameTimeFormat = '00:00:00',
+    rounds = 0, hitAverage = 0,
     typedWords = 0, difficultyLevel, points = 0,
     timePlayed = 0, timePlayedInt, timePlayedFormat
 
@@ -66,8 +67,8 @@ function draw(drw) {
                     <i class="fas fa-times" id="menu-close-icon"></i>
                     <p class="statistics-title">Statistics</p>
                     <div class="menu-info">
-                        <p>Game Time <span>...</span></p>
-                        <p>Rounds <span>...</span></p>
+                        <p>Game Time <span>${gameTimeFormat}</span></p>
+                        <p>Rounds <span>${rounds}</span></p>
                         <p>Hit Average <span>...</span></p>
                     </div>
                 <div>`
@@ -83,7 +84,7 @@ function draw(drw) {
                         <span>Points: </span> 
                         <span class="points-value">${points}</span>
                     </div>
-                    <button onclick='resetGame()'>New Game</button>
+                    <button onclick='resetGame()'>Play Again</button>
                 </div>`
         ]
     ]
@@ -91,8 +92,17 @@ function draw(drw) {
     return drawing[drw]
 }
 
+
 drawingArea.innerHTML = draw(0)
 input.disabled = true
+
+if (localStorage.getItem('speedTime') !== null) {
+    gameTime = Number(localStorage.getItem('gameTime'))
+    rounds = Number(localStorage.getItem('rounds'))
+
+    gameTimeFormat = setTimeFormat(gameTime)
+}
+
 
 input.addEventListener('input', e => {
     const insertedText = e.target.value
@@ -116,6 +126,8 @@ function initGame() {
         speedTime = 600
         localStorage.setItem('lang', lang)
         localStorage.setItem('speedTime', speedTime)
+        localStorage.setItem('gameTime', gameTime)
+        localStorage.setItem('rounds', rounds)
     } else {
         lang = Number(localStorage.getItem('lang'))
         speedTime = Number(localStorage.getItem('speedTime'))
@@ -144,10 +156,12 @@ function setConfigs() {
     pause = true
     setBlur()
 
-    idm = document.querySelector('#language') // access variables
+    // access variables
+    idm = document.querySelector('#language')
     diff = document.querySelector('#difficulty')
 
-    idm.value = localStorage.getItem('lang') // view selection historic
+    // view selection historic
+    idm.value = localStorage.getItem('lang')
     diff.value = localStorage.getItem('speedTime')
 
     document.querySelector('#form-close-icon')
@@ -214,45 +228,49 @@ function updateTypedWords() {
 }
 
 function updateTime() {
-    console.log("Time");
     if (pause) return
+    console.log("updateTime");
 
     time--
     timeHG.innerHTML = time + 's'
 
     if (time <= 0) {
-        settingsIcon.style.display = 'none'
         clearInterval(timeInterval)
         clearInterval(timePlayedInt)
-        input.value = ''
-        endGame = true
-        setBlur()
         gameOver()
     }
 }
 
 function timePlayedUp() {
-    let minutes, seconds
+    if (pause) return
+    console.log("timePlayedUP");
     timePlayed++
+}
 
-    if (timePlayed <= 60) {
-        if (timePlayed < 10) timePlayedFormat = `00:00:0${timePlayed}`
-        else timePlayedFormat = `00:00:${timePlayed}`
+function setTimeFormat(timeValue) {
+    let timeFormatted,
+        minutes, seconds
+
+    if (timeValue <= 60) {
+        if (timeValue < 10) timeFormatted = `00:00:0${timeValue}`
+        else timeFormatted = `00:00:${timeValue}`
     }
 
-    if (timePlayed === 60) timePlayedFormat = `00:01:00`
+    if (timeValue === 60) timeFormatted = `00:01:00`
 
-    if (timePlayed > 60) {
-        minutes = Math.floor(timePlayed / 60)
-        seconds = timePlayed % 60
+    if (timeValue > 60) {
+        minutes = Math.floor(timeValue / 60)
+        seconds = timeValue % 60
 
         if (minutes < 10) minutes = `0${minutes}`
         if (seconds < 10) seconds = `0${seconds}`
 
-        timePlayedFormat = `00:${minutes}:${seconds}`
+        timeFormatted = `00:${minutes}:${seconds}`
     }
 
-    if (minutes === 60) timePlayedFormat = `01:00:00`
+    if (minutes === 60) timeFormatted = `01:00:00`
+
+    return timeFormatted
 }
 
 function viewPopupMenu() {
@@ -276,10 +294,25 @@ function viewPopupMenu() {
 }
 
 function gameOver() {
+    gameTime += timePlayed
+    rounds++
+
+    // save value
+    localStorage.setItem('gameTime', gameTime)
+    localStorage.setItem('rounds', rounds)
+
+    // view values
+    gameTimeFormat = setTimeFormat(gameTime)
+    timePlayedFormat = setTimeFormat(timePlayed)
+
     if (speedTime === 1000) difficultyLevel = 'Medium'
     if (speedTime === 600) difficultyLevel = 'Hard'
     if (speedTime === 300) difficultyLevel = 'Expert'
 
+    setBlur()
+    endGame = true
+    input.value = ''
+    settingsIcon.style.display = 'none'
     drawingArea.innerHTML = draw(3)
 }
 
