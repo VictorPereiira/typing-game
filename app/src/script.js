@@ -35,7 +35,7 @@ let gameTime = 0, gameTimeFormat = '00:00:00',
 function draw(drw) {
     let drawing = [
         [
-            `<button class="button-startGame"onclick='initGame()'>Start Game</button>`
+            `<button class="button-startGame" onclick='initGame()'>Start Game</button>`
         ],
         [
             `<form action="">
@@ -84,7 +84,10 @@ function draw(drw) {
                         <span>Points: </span> 
                         <span class="points-value">${points}</span>
                     </div>
-                    <button onclick='resetGame()'>Play Again</button>
+                    <div>
+                        <button class="button-quitGame" onclick='reloadPage()'>Main Menu</button>
+                        <button onclick='resetGame()'>Play Again</button>
+                    </div>
                 </div>`
         ]
     ]
@@ -92,18 +95,11 @@ function draw(drw) {
     return drawing[drw]
 }
 
-
 drawingArea.innerHTML = draw(0)
 input.disabled = true
 
-if (localStorage.getItem('speedTime') !== null) {
-    gameTime = Number(localStorage.getItem('gameTime'))
-    rounds = Number(localStorage.getItem('rounds'))
 
-    gameTimeFormat = setTimeFormat(gameTime)
-}
-
-
+// check words typing
 input.addEventListener('input', e => {
     const insertedText = e.target.value
 
@@ -120,6 +116,8 @@ input.addEventListener('input', e => {
     }
 })
 
+
+// init functions
 function initGame() {
     if (localStorage.getItem('speedTime') === null) {
         lang = 0
@@ -143,12 +141,30 @@ function startGame() {
     input.placeholder = ''
 
     wordToDOM()
-    timeInterval = setInterval(updateTime, speedTime)
+    timeInterval = setInterval(updateClock, speedTime)
     timePlayedInt = setInterval(timePlayedUp, 1000)
 
     input.focus()
 }
 
+function wordToDOM() {
+    overall = words[lang].length
+
+    if (turn < 1) {
+        randomNumber = Math.floor(Math.random() * overall)
+    } else {
+        while (boxRandom.indexOf(randomNumber) > -1) { // exists randomNumber repeats
+            randomNumber = Math.floor(Math.random() * overall)
+        }
+    }
+
+    randomWord = words[lang][randomNumber]
+    boxRandom.push(randomNumber)
+    word.innerHTML = randomWord
+}
+
+
+// util functions
 function setConfigs() {
     let diff, idm
     drawingArea.innerHTML = draw(1)
@@ -204,38 +220,30 @@ function setConfigs() {
     })
 }
 
-function checkLengthBoxRadom() {
-    if (boxRandom.length === words[lang].length) boxRandom.splice(0, Number.MAX_VALUE)
+function viewPopupMenu() {
+    if (time > 0) settingsIcon.style.display = 'none'
+    if (timeInterval !== undefined) pause = true
+    setBlur()
+
+    drawingArea.innerHTML = draw(2)
+
+    document.querySelector('#menu-close-icon')
+        .addEventListener('click', () => {
+            if (timeInterval === undefined) drawingArea.innerHTML = draw(0)
+            else {
+                drawingArea.innerHTML = ''
+                settingsIcon.style.display = 'block'
+                pause = false
+                input.focus()
+            }
+            setBlur()
+        })
 }
 
-function setBlur() {
-    blurArea.classList.toggle('active')
-}
 
-function wordToDOM() {
-    overall = words[lang].length
-
-    if (turn < 1) {
-        randomNumber = Math.floor(Math.random() * overall)
-    } else {
-        while (boxRandom.indexOf(randomNumber) > -1) { // exists randomNumber repeats
-            randomNumber = Math.floor(Math.random() * overall)
-        }
-    }
-
-    randomWord = words[lang][randomNumber]
-    boxRandom.push(randomNumber)
-    word.innerHTML = randomWord
-}
-
-function updateTypedWords() {
-    typedWords++
-    typedWordsHG.innerHTML = typedWords
-}
-
-function updateTime() {
+// control functions 
+function updateClock() {
     if (pause) return
-    console.log("updateTime");
 
     time--
     timeHG.innerHTML = time + 's'
@@ -247,9 +255,13 @@ function updateTime() {
     }
 }
 
+function updateTypedWords() {
+    typedWords++
+    typedWordsHG.innerHTML = typedWords
+}
+
 function timePlayedUp() {
     if (pause) return
-    console.log("timePlayedUP");
     timePlayed++
 }
 
@@ -303,26 +315,7 @@ function setPoints() {
 }
 
 
-function viewPopupMenu() {
-    if (time > 0) settingsIcon.style.display = 'none'
-    if (timeInterval !== undefined) pause = true
-    setBlur()
-
-    drawingArea.innerHTML = draw(2)
-
-    document.querySelector('#menu-close-icon')
-        .addEventListener('click', () => {
-            if (timeInterval === undefined) drawingArea.innerHTML = draw(0)
-            else {
-                drawingArea.innerHTML = ''
-                settingsIcon.style.display = 'block'
-                pause = false
-                input.focus()
-            }
-            setBlur()
-        })
-}
-
+// endGame functions 
 function gameOver() {
     if (turn > 0) {
         gameTime += timePlayed
@@ -367,3 +360,24 @@ function resetGame() {
 }
 
 
+// functions seconds
+function checkLengthBoxRadom() {
+    if (boxRandom.length === words[lang].length) boxRandom.splice(0, Number.MAX_VALUE)
+}
+
+function setBlur() {
+    blurArea.classList.toggle('active')
+}
+
+function reloadPage() {
+    location.reload()
+}
+
+
+// check conditional
+if (localStorage.getItem('speedTime') !== null) {
+    gameTime = Number(localStorage.getItem('gameTime'))
+    rounds = Number(localStorage.getItem('rounds'))
+
+    gameTimeFormat = setTimeFormat(gameTime)
+}

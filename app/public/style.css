@@ -182,10 +182,11 @@
 
 .drawingArea form .button-newGame {
     margin-top: 95px;
-    background:#F5C00D;
+    background:#f5c114;
 }
 
-.drawingArea form .button-newGame:hover {
+.drawingArea form .button-newGame:hover,
+.drawingArea .endGame-container .button-quitGame:hover {
     background:#f5e60d;
 }
 
@@ -225,6 +226,9 @@
     font-size: 50px;
 }
 
+.drawingArea .endGame-container .button-quitGame {
+    background: #f5c114;
+}
 
 /* drawingArea menu-container */
 .menu-container p, 
