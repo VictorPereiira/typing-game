@@ -32,71 +32,117 @@ let gameTime = 0, gameTimeFormat = '00:00:00',
     typedWords = 0, difficultyLevel, points = 0,
     timePlayed = 0, timePlayedInt, timePlayedFormat
 
+
+// check conditional
+if (localStorage.getItem('speedTime') !== null) {
+    lang = Number(localStorage.getItem('lang'))
+    gameTime = Number(localStorage.getItem('gameTime'))
+    rounds = Number(localStorage.getItem('rounds'))
+    gameTimeFormat = setTimeFormat(gameTime)
+
+    if (lang === 0) {
+        word.innerHTML = 'Happiness'
+        input.placeholder = 'Write the word here!!!'
+    }
+
+    if (lang === 1) {
+        word.innerHTML = 'Felicidade'
+        input.placeholder = 'Escreva as palavras aqui!!!'
+    }
+} else {
+    lang = 0
+    speedTime = 600
+}
+
+
+// start ui
+drawingArea.innerHTML = draw(0)
+input.disabled = true
+
 function draw(drw) {
+    let text
+
+    if (lang === 0) text = [
+        ['Start Game'], ['Settings'], ['Language'],
+        ['Difficulty'], ['Medium'], ['Hard'],
+        ['Expert'], ['New Game'], ['Save'],
+        ['Statistics'], ['Game Time'], ['Rounds'],
+        ['Hit Average'], ['Time ran out'], ['Time Played'],
+        ['Error Rate'], ['Difficulty'], ['Typed Words'],
+        ['Points'], ['Main Menu'], ['Play Again']
+
+    ]
+
+    if (lang === 1) text = [
+        ['Começar Jogo'], ['Configurações'], ['Idioma'],
+        ['Dificuldade'], ['Médio'], ['Difícil'],
+        ['Expert'], ['Novo Jogo'], ['Salvar'],
+        ['Estatísticas'], ['Tempo de Jogo'], ['Rodadas'],
+        ['Média de Acertos'], ['Tempo Finalizado'], ['Duração da Partida'],
+        ['Taxa de Erro'], ['Difficuldade'], ['Palavras Escritas'],
+        ['Pontos'], ['Menu Principal'], ['Jogar Novamente']
+    ]
+
     let drawing = [
         [
-            `<button class="button-startGame" onclick='initGame()'>Start Game</button>`
+            `<button class="button-startGame" onclick='initGame()'>${text[0]}</button>`
         ],
         [
             `<form action="">
                     <i class="fas fa-times" id="form-close-icon"></i>
-                    <p class="settings-title">Settings</p>
+                    <p class="settings-title">${text[1]}</p>
                     <div class="settings-controls">
                         <div>
-                            <p for="language">Language</p>
+                            <p for="language">${text[2]}</p>
                             <select id="language">
                                 <option value="0">En</option>
                                 <option value="1">Pt</option>
                             </select>
                         </div>
                         <div>
-                            <p for="difficulty">Difficulty</p>
+                            <p for="difficulty">${text[3]}</p>
                             <select id="difficulty" class="firstSelect">
-                                <option value="1000">Medium</option>
-                                <option value="600">Hard</option>
-                                <option value="300">Expert</option>
+                                <option value="1000">${text[4]}</option>
+                                <option value="600">${text[5]}</option>
+                                <option value="300">${text[6]}</option>
                             </select>
                         </div>
                     </div>
-                    <button class="button-newGame">New Game</button>
-                    <button class="button-Save"type="submit">Save</button>   
+                    <button class="button-newGame">${text[7]}</button>
+                    <button class="button-Save"type="submit">${text[8]}</button>   
                 </form>`
         ],
         [
             `<div class="menu-container">
                     <i class="fas fa-times" id="menu-close-icon"></i>
-                    <p class="statistics-title">Statistics</p>
+                    <p class="statistics-title">${text[9]}</p>
                     <div class="menu-info">
-                        <p>Game Time <span>${gameTimeFormat}</span></p>
-                        <p>Rounds <span>${rounds}</span></p>
-                        <p>Hit Average <span>...</span></p>
+                        <p>${text[10]}:<span>${gameTimeFormat}</span></p>
+                        <p>${text[11]}:<span>${rounds}</span></p>
+                        <p>${text[12]}:<span>...</span></p>
                     </div>
                 <div>`
         ],
         [
             `<div class="endGame-container">
-                    <h2>Time ran out</h2 >
-                    <p>Time Played: <span>${timePlayedFormat}</span></p>
-                    <p>Error Rate: <span>...</span></p>
-                    <p>Difficulty: <span>${difficultyLevel}</span></p>
-                    <p>Typed Words: <span>${typedWords}</span></p>
+                    <h2>${text[13]}</h2 >
+                    <p>${text[14]}: <span>${timePlayedFormat}</span></p>
+                    <p>${text[15]}: <span>...</span></p>
+                    <p>${text[16]}: <span>${difficultyLevel}</span></p>
+                    <p>${text[17]}: <span>${typedWords}</span></p>
                     <div class="points-container">
-                        <span>Points: </span> 
+                        <span>${text[18]}: </span> 
                         <span class="points-value">${points}</span>
                     </div>
                     <div>
-                        <button class="button-quitGame" onclick='reloadPage()'>Main Menu</button>
-                        <button onclick='resetGame()'>Play Again</button>
+                        <button class="button-quitGame" onclick='reloadPage()'>${text[19]}</button>
+                        <button onclick='resetGame()'>${text[20]}</button>
                     </div>
                 </div>`
         ]
     ]
-
     return drawing[drw]
 }
-
-drawingArea.innerHTML = draw(0)
-input.disabled = true
 
 
 // check words typing
@@ -120,8 +166,6 @@ input.addEventListener('input', e => {
 // init functions
 function initGame() {
     if (localStorage.getItem('speedTime') === null) {
-        lang = 0
-        speedTime = 600
         localStorage.setItem('lang', lang)
         localStorage.setItem('speedTime', speedTime)
         localStorage.setItem('gameTime', gameTime)
@@ -214,6 +258,7 @@ function setConfigs() {
             input.focus()
 
             setBlur()
+            console.log(idm.value);
             localStorage.setItem('lang', idm.value)
             localStorage.setItem('speedTime', diff.value)
         }
@@ -225,11 +270,11 @@ function viewPopupMenu() {
     if (timeInterval !== undefined) pause = true
     setBlur()
 
-    drawingArea.innerHTML = draw(2)
+    drawingArea.innerHTML = draw(2, lang)
 
     document.querySelector('#menu-close-icon')
         .addEventListener('click', () => {
-            if (timeInterval === undefined) drawingArea.innerHTML = draw(0)
+            if (timeInterval === undefined) drawingArea.innerHTML = draw(0, lang)
             else {
                 drawingArea.innerHTML = ''
                 settingsIcon.style.display = 'block'
@@ -374,10 +419,13 @@ function reloadPage() {
 }
 
 
-// check conditional
-if (localStorage.getItem('speedTime') !== null) {
-    gameTime = Number(localStorage.getItem('gameTime'))
-    rounds = Number(localStorage.getItem('rounds'))
+document.addEventListener('keydown', e => {
+    if (e.key === "Enter" && !endGame) e.preventDefault()
+    else if (e.key === "Enter" && endGame) {
+        e.preventDefault()
+        resetGame()
+    }
+});
 
-    gameTimeFormat = setTimeFormat(gameTime)
-}
+
+
