@@ -8,6 +8,12 @@
     color: #DFDFE0
 }
 
+a {
+    text-decoration: none;
+}
+
+
+/* game */
 .game {
     display: flex;
     width: 100%;
@@ -19,12 +25,13 @@
     background: #3B13AC;
 }
 
+
+
 .core#blur.active {
     filter: blur(5px);
     pointer-events: none;
     user-select: none;
 }
-
 
 /* top area */
 .top {
@@ -69,23 +76,23 @@
     outline: none;
     background: none;
     border: 1px solid #DFDFE0;
-    border-radius: 15px;
+    border-radius: 10px;
 
     text-align: center;
     font-size: 15px;
     font-weight: 700;
 }
 
-
 /* drawingArea Button */
 .drawingArea button{
     background: #491BC7;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
     height: 37px;
-    width: 140px;
+    width: 140px; 
+    padding: 12px;
+    border-radius: 10px;
     
     margin: 33px auto 0 auto;
-    border-radius: 20px;
     border: none;
 
     cursor: pointer;
@@ -182,12 +189,12 @@
 
 .drawingArea form .button-newGame {
     margin-top: 95px;
-    background:#f5c114;
+    background:#e9da0d;
 }
 
 .drawingArea form .button-newGame:hover,
 .drawingArea .endGame-container .button-quitGame:hover {
-    background:#f5e60d;
+    background:#f1e210;
 }
 
 .drawingArea form .button-Save {
@@ -196,6 +203,10 @@
 
 
 /* drawingArea endGame-container */
+.endGame-container {
+    height: 420px;
+}
+
 .drawingArea .endGame-container h2{
     margin-bottom: 20px;
     font-size: 22px;
@@ -226,8 +237,14 @@
     font-size: 50px;
 }
 
+.drawingArea .endGame-container button {
+    display: block;
+    margin-top: 0;
+}
+
 .drawingArea .endGame-container .button-quitGame {
-    background: #f5c114;
+    margin: 15px auto;
+    background: #e9da0d;
 }
 
 /* drawingArea menu-container */
@@ -296,4 +313,46 @@
 .menu-icon {
     margin-left: 22px;
     cursor: pointer;
+}
+
+
+/* copy */
+.copy {
+    position: absolute;
+    bottom: 20px;
+}
+
+.copy p:last-child {
+    margin-top: 5px;
+}
+
+.copy a {
+    color: #e9da0d;
+}
+
+.copy a:hover {
+    color: #f1e210;
+}
+
+
+/* gitHubInfo */
+.gitHubInfo {
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    transform: translateX(-50%);
+}
+
+.gitHubInfo i {
+    background: #491BC7;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #ebebeb;
+    transition: ease-in-out 0.3s;
+}
+
+.gitHubInfo i:hover {
+    background: #5d22ff;
 }

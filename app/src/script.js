@@ -121,6 +121,12 @@ function draw(drw) {
                         <p>${text[11]}:<span>${rounds}</span></p>
                         <p>${text[12]}:<span>...</span></p>
                     </div>
+                    <div class="gitHubInfo">
+                        <a href="https://github.com/VictorPereiira/typing-game"
+                            target="blank">
+                            <i class="fab fa-github">Github</i>
+                        </a>
+                    </div>
                 <div>`
         ],
         [
@@ -213,6 +219,7 @@ function setConfigs() {
     let diff, idm
     drawingArea.innerHTML = draw(1)
     settingsIcon.style.display = 'none'
+    input.disabled = true
     pause = true
     setBlur()
 
@@ -227,6 +234,7 @@ function setConfigs() {
     document.querySelector('#form-close-icon')
         .addEventListener('click', () => {
             settingsIcon.style.display = 'block'
+            input.disabled = false
             drawingArea.innerHTML = ''
             pause = false
             input.focus()
@@ -237,6 +245,7 @@ function setConfigs() {
         .addEventListener('click', () => {
             clearInterval(timeInterval)
             clearInterval(timePlayedInt)
+            input.disabled = false
             pause = false
             input.value = ''
             timePlayed = 0
@@ -254,6 +263,7 @@ function setConfigs() {
         if (pause === true) {
             settingsIcon.style.display = 'block'
             drawingArea.innerHTML = ''
+            input.disabled = false
             pause = false
             input.focus()
 
@@ -268,6 +278,7 @@ function setConfigs() {
 function viewPopupMenu() {
     if (time > 0) settingsIcon.style.display = 'none'
     if (timeInterval !== undefined) pause = true
+    input.disabled = true
     setBlur()
 
     drawingArea.innerHTML = draw(2, lang)
@@ -281,6 +292,7 @@ function viewPopupMenu() {
                 pause = false
                 input.focus()
             }
+            input.disabled = false
             setBlur()
         })
 }
