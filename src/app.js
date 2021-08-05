@@ -162,9 +162,9 @@ input.addEventListener('input', e => {
         wordToDOM()
         e.target.value = ''
 
-        if (speedTime === 1000) time += 2
-        if (speedTime === 600) time += 3
-        if (speedTime === 300) time += 5
+        if (speedTime === 1000) return time += 2
+        if (speedTime === 600) return time += 3
+        if (speedTime === 300) return time += 5
     }
 })
 

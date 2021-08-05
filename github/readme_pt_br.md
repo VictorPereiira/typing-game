@@ -9,41 +9,41 @@
 
 
 <p align = "center">
-    <a href="#about">About</a>   |
-    <a href="#features">Features</a>   |
-    <a href="#technologies">Technologies</a>   |
+    <a href="#sobre">Sobre</a>   |
+    <a href="#funcionalidades">Funcionalidades</a>   |
+    <a href="#tecnologias">Tecnologias</a>   |
     <a href="#layout">Layout</a>   |
-    <a href="#howToUse">How to use</a>   |
-    <a href="#howToContribute">How to contribute</a>   |
-    <a href="#license">License</a> 
+    <a href="#comoUsar">Como usar</a>   |
+    <a href="#comoContribuir">Como contribuir</a>   |
+    <a href="#licença">Licença</a> 
 </p>
 
 <p align = "center"><img height = '400' src = "https://user-images.githubusercontent.com/64560823/127571876-967811e4-8686-45b2-8140-f35f76dbc58e.gif")
 ><p>  
 
 <div align="center">
-    Translate for 
-    <a href="./github/readme_pt_br.md">PT-BR</a> 
+    Traduza para 
+    <a href="../README.md">EN-US</a> 
 </div>
 
- > 🎮 Project  Access : [Live Demo](https://victorpereiira.github.io/typing-game/public/index.html) 
+ > 🎮 Accesse o projeto : [Abrir](https://victorpereiira.github.io/typing-game/public/index.html) 
 
-## About
- <p>the typing game is a project that was developed with the purpose of learning about `localStore` and `events` with Javascript</p> 
+## Sobre
+ <p>O Typing game é um projeto que foi desenvolvido com o objetivo de conhecer o `localStore`  e os `events` do Javascript</p> 
 
-## Features
-- [X] Time control for `setInterval()`
-- [X] Use `localStore` variables
-- [X] Monitoring RandomWord for `event.input` 
-- [X] Difficulty levels
-- [X] Points system 
-- [X] DrawArea HTML generator
-- [X] Support other languages
-- [ ] Hit Average
-- [ ] Error Rate
+## Funcionalidades
+- [X] Controle do tempo através do `setInterval()` 
+- [X] Utilização `localStore` em variaves
+- [X] Monitoramento RandomWord por meio de `event.input` 
+- [X] Níves de Dificuldade que alteram a velocidade do tempo
+- [X] Sistema de pontos
+- [X] Gerador de código HTML
+- [X] Suporte a outros idiomas
+- [ ] Média de acertos
+- [ ] Taxa de erros
 
   
-## Technologies
+## Tecnologias
 - [Vanilla JS](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
   
 ## Layout
@@ -51,15 +51,15 @@
 <img src = "./github/popup.svg">
 
 
-<h2 id="howToUse">How to use</h2>
+<h2 id="comoUsar">Como usar</h2>
 <p>
-    To clone an run this application, you'll need 
+    Para clonar essa aplicação, você vai precisar do 
     <a href="https://git-scm.com/">Git</a>
-    , installed on your computer.
+    , instalado no seu computador.
 </p>
-<p>Execute the command line:</p>
+<p>Execute no terminal:</p>
 
-### Clone the project
+### Copie esse projeto
 
 ```bash
  # Clone this repository
@@ -70,15 +70,13 @@ $ cd typing-game
 ```
 
 
-<h2 id="howToContribute">How to contribute</h2>
+<h2 id="comoCotribuir">Como contribuir</h2>
 
-- Make a fork;
-- Create a branch with your feature: `git checkout -b my-feature`;
-- Commit changes: `git commit -m "feat: my new feature`;
-- Make a push to your branch: `git push origin my-feature`
+- Faça um Fork;
+- Crie uma branch com sua funcionalidade: `git checkout -b my-feature`;
+- Commit as alterações: `git commit -m "feat: my new feature`;
+- Faça um push da sua branch: `git push origin my-feature`
   
-<p>After meging your receipt request to done, you can delete a branch from yours.</p>
-
 ## License
 This project is under the MIT license. See the 
 <a href = "https://github.com/VictorPereiira/typing-game/blob/master/LICENSE">LICENSE</a> 
