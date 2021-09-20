@@ -29,7 +29,10 @@
  > 🎮 Project  Access : [Live Demo](https://victorpereiira.github.io/typing-game/public/index.html) 
 
 ## About
- <p>the typing game is a project that was developed with the purpose of learning about `localStore` and `events` with Javascript</p> 
+<p><b>Typing game</b> is a "mini game" developed in <b>Html5</b>, <b>Css3</b> and <b>Javascript</b>, and aims to improve the writing of words in <b>different languages</b>, enabling fun and learning in one place. The player can challenge himself among the <b>"difficulty levels"</b> available in the game, so at the end of each round he receives a score according to his performance.</p>
+
+## What I Learned
+ <p><b>The typing game</b> is a project that was developed with the purpose of learning about <code>localStore</code>, <code>events</code> and <code>DOM</code> with Javascript.</p> 
 
 ## Features
 - [X] Time control for `setInterval()`
@@ -75,7 +78,7 @@ $ cd typing-game
 - Make a fork;
 - Create a branch with your feature: `git checkout -b my-feature`;
 - Commit changes: `git commit -m "feat: my new feature`;
-- Make a push to your branch: `git push origin my-feature`
+- Make a push to your branch: `git push origin my-feature`.
   
 <p>After meging your receipt request to done, you can delete a branch from yours.</p>
 
