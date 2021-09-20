@@ -14,7 +14,7 @@
     <a href="#tecnologias">Tecnologias</a>   |
     <a href="#layout">Layout</a>   |
     <a href="#comoUsar">Como usar</a>   |
-    <a href="#comoContribuir">Como contribuir</a>   |
+    <a href="#comoCotribuir">Como contribuir</a>   |
     <a href="#licença">Licença</a> 
 </p>
 
@@ -29,7 +29,10 @@
  > 🎮 Accesse o projeto : [Abrir](https://victorpereiira.github.io/typing-game/public/index.html) 
 
 ## Sobre
- <p>O Typing game é um projeto que foi desenvolvido com o objetivo de conhecer o `localStore`  e os `events` do Javascript</p> 
+<p><b>Typing game</b>  é um "mini jogo" desenvolvido em <b>Html5</b>, <b>Css3</b> e <b>Javascript</b>, e tem como objetivo, aperfeiçoar a escrita de palavras em <b>idiomas diferentes</b>, possibilitando diversão e aprendizado em um único lugar. O jogador pode se desafiar entre os <b>"níveis de dificuldades"</b> disponíveis no jogo, assim, no final de cada rodada recebe uma pontuação de acordo com seu desempenho.</p>
+
+## Aprendizado
+ <p><b>O Typing game</b> é um projeto que foi desenvolvido com o objetivo de conhecer o <code>localStore</code>, <code>events</code> and <code>DOM</code> do Javascript.</p> 
 
 ## Funcionalidades
 - [X] Controle do tempo através do `setInterval()` 
@@ -47,11 +50,12 @@
 - [Vanilla JS](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
   
 ## Layout
-<img src = "./github/game.svg">
-<img src = "./github/popup.svg">
+<img src = "game.svg">
+<img src = "popup.svg">
 
 
 <h2 id="comoUsar">Como usar</h2>
+
 <p>
     Para clonar essa aplicação, você vai precisar do 
     <a href="https://git-scm.com/">Git</a>
@@ -75,12 +79,12 @@ $ cd typing-game
 - Faça um Fork;
 - Crie uma branch com sua funcionalidade: `git checkout -b my-feature`;
 - Commit as alterações: `git commit -m "feat: my new feature`;
-- Faça um push da sua branch: `git push origin my-feature`
+- Faça um push da sua branch: `git push origin my-feature`.
   
-## License
-This project is under the MIT license. See the 
+## Licença
+Este projeto está sob a licença do MIT. Veja em
 <a href = "https://github.com/VictorPereiira/typing-game/blob/master/LICENSE">LICENSE</a> 
-for details.
+para mais detalhes.
 
 #
 <p align = "center">
