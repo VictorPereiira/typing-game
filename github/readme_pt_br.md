@@ -2,8 +2,8 @@
 
 <div align="center">  
    <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/victorpereiira/typing-game">
-   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/victorpereiira/typing-game">
-   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/victorpereiira/typing-game">
+   <!-- <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/victorpereiira/typing-game"> -->
+   <!-- <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/victorpereiira/typing-game"> -->
    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/victorpereiira/typing-game">
 </div>
 
@@ -11,7 +11,7 @@
 <p align = "center">
     <a href="#sobre">Sobre</a>   |
     <a href="#funcionalidades">Funcionalidades</a>   |
-    <a href="#tecnologias">Tecnologias</a>   |
+    <!-- <a href="#tecnologias">Tecnologias</a>   | -->
     <a href="#layout">Layout</a>   |
     <a href="#comoUsar">Como usar</a>   |
     <a href="#comoCotribuir">Como contribuir</a>   |
@@ -23,16 +23,17 @@
 
 <div align="center">
     Traduza para 
-    <a href="../README.md">EN-US</a> 
+    <a href="https://github.com/VictorPereiira/typing-game">EN-US</a> 
 </div>
 
  > 🎮 Accesse o projeto : [Abrir](https://victorpereiira.github.io/typing-game/public/index.html) 
+  > 📄 Plano de Projeto: [Kanban](https://github.com/users/VictorPereiira/projects/4)
 
 ## Sobre
 <p><b>Typing game</b>  é um "mini jogo" desenvolvido em <b>Html5</b>, <b>Css3</b> e <b>Javascript</b>, e tem como objetivo, aperfeiçoar a escrita de palavras em <b>idiomas diferentes</b>, possibilitando diversão e aprendizado em um único lugar. O jogador pode se desafiar entre os <b>"níveis de dificuldades"</b> disponíveis no jogo, assim, no final de cada rodada recebe uma pontuação de acordo com seu desempenho.</p>
 
 ## Aprendizado
- <p><b>O Typing game</b> é um projeto que foi desenvolvido com o objetivo de conhecer o <code>localStore</code>, <code>events</code> and <code>DOM</code> do Javascript.</p> 
+ <p>Este projeto foi desenvolvido com o objetivo de aprender sobre manipulação de dados <code>localStore</code> e manipulação de <code>DOM Events</code>.</p> 
 
 ## Funcionalidades
 - [X] Controle do tempo através do `setInterval()` 
@@ -46,8 +47,8 @@
 - [ ] Taxa de erros
 
   
-## Tecnologias
-- [Vanilla JS](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+<!-- ## Tecnologias
+- [Vanilla JS](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript) -->
   
 ## Layout
 <img src = "game.svg">
@@ -66,10 +67,13 @@
 ### Copie esse projeto
 
 ```bash
- # Clone this repository
+ # Clone o repositório
+# com github classic token
 $ git clone https://github.com/VictorPereiira/typing-game.git
+# com ssh key
+$ git clone git@github.com:VictorPereiira/typing-game.git
 
-# Go into the repository
+# entre no repositório
 $ cd typing-game
 ```
 
@@ -89,5 +93,5 @@ para mais detalhes.
 #
 <p align = "center">
     Made by 👨🏾‍💻 
-    <a href="https://www.linkedin.com/in/victorspsr/">VictorPereira</a>
+    <a href="https://www.linkedin.com/in/victorpereiira">VictorPereira</a>
 </p>

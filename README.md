@@ -93,5 +93,5 @@ for details.
 #
 <p align = "center">
     Made by 👨🏾‍💻 
-    <a href="https://www.linkedin.com/in/victorspsr/">VictorPereira</a>
+    <a href="https://www.linkedin.com/in/victorpereiira">VictorPereira</a>
 </p>
