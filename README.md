@@ -25,6 +25,7 @@
 </div>
 
  > 🎮 Project  Access : [Live Demo](https://victorpereiira.github.io/typing-game/public/index.html) 
+
  > 📄 Project Planner: [Kanban](https://github.com/users/VictorPereiira/projects/4)
 
 ## About
