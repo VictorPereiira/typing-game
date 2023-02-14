@@ -27,7 +27,8 @@
 </div>
 
  > 🎮 Accesse o projeto : [Abrir](https://victorpereiira.github.io/typing-game/public/index.html) 
-  > 📄 Plano de Projeto: [Kanban](https://github.com/users/VictorPereiira/projects/4)
+ 
+ > 📄 Plano de Projeto: [Kanban](https://github.com/users/VictorPereiira/projects/4)
 
 ## Sobre
 <p><b>Typing game</b>  é um "mini jogo" desenvolvido em <b>Html5</b>, <b>Css3</b> e <b>Javascript</b>, e tem como objetivo, aperfeiçoar a escrita de palavras em <b>idiomas diferentes</b>, possibilitando diversão e aprendizado em um único lugar. O jogador pode se desafiar entre os <b>"níveis de dificuldades"</b> disponíveis no jogo, assim, no final de cada rodada recebe uma pontuação de acordo com seu desempenho.</p>
