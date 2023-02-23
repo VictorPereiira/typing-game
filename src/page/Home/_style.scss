@@ -2,4 +2,118 @@
 @import '../../style/main.scss';
 
 // Style
-#home {}
+#home {
+    // border: 1px solid red;
+    width: 850px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 50px;
+    margin: 0 auto;
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 15px;
+        border-bottom: 2px solid $white;
+        margin-bottom: 70px;
+
+        .header__title h1 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .header__actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: center;
+
+            .header__time {
+                font-size: 25px;
+                font-weight: 500;
+            }
+
+            .header__icon-time {}
+
+            .header__button {}
+        }
+    }
+
+
+    main {
+        // border: 1px solid red;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin: 0 auto;
+
+        .main__word {
+            margin-bottom: 10px;
+            font-size: 80px;
+            font-weight: 500;
+        }
+
+        .main__point {
+            margin-bottom: 75px;
+            font-size: 30px;
+        }
+
+        .main__input {
+            width: 400px;
+            height: 40px;
+            padding: 5px 0;
+            background: none;
+            outline: none;
+            border: 1px solid $white;
+            border-radius: 10px;
+            margin: 0 auto 30px auto;
+
+            text-align: center;
+            color: $white;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .main__button {
+            background: #491BC7;
+            width: 140px;
+            height: 37px;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s ease-out;
+            margin: 0 auto;
+
+            color: $white;
+            font-weight: 700;
+            text-transform: uppercase;
+
+            box-shadow: 0 4px 4px rgb(0 0 0 / 40%);
+        }
+    }
+
+    footer {
+        // border: 1px solid red;
+        display: flex;
+        flex-direction: column;
+        padding: 3px 0;
+        gap: 5px;
+
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+
+
+        a {
+            color: $yellow;
+        }
+    }
+}
