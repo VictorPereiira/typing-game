@@ -1,0 +1,25 @@
+// Colors and configs
+@import '../../../style/main.scss';
+
+#setting-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 120px;
+}
+
+#setting-footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        background-color: $purple;
+        width: 140px;
+        height: 40px;
+        border: none;
+        border-radius: 10px;
+    }
+}
