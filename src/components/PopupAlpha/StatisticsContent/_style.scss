@@ -1,0 +1,29 @@
+// Colors and configs
+@import '../../../style/main.scss';
+
+#statistics-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 200px;
+
+    div {
+        display: flex;
+        justify-content: space-between;
+
+        p {
+            color: $black
+        }
+    }
+}
+
+#statistics-footer-content {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+    button {
+        width: 60px;
+        color: $black;
+    }
+}
