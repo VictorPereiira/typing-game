@@ -5,9 +5,9 @@ import { $ } from "./utils/snippets.js";
 
 async function App() {
     // $("body").innerHTML = await Home();
-    $("body").innerHTML = await CardGameOver();
+    // $("body").innerHTML = await CardGameOver();
     // $("body").innerHTML = await CardDefault("settings");
-    // $("body").innerHTML += await CardDefault("statistics");
+    $("body").innerHTML += await CardDefault("statistics");
 }
 
 export default App;

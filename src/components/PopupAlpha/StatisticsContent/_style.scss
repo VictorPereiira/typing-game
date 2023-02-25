@@ -2,19 +2,7 @@
 @import '../../../style/main.scss';
 
 #statistics-main-content {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
     margin-bottom: 200px;
-
-    div {
-        display: flex;
-        justify-content: space-between;
-
-        p {
-            color: $black
-        }
-    }
 }
 
 #statistics-footer-content {

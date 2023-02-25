@@ -1,21 +1,13 @@
 // import { $ } from "../../utils/snippets";
+import SimpleTable from "../../SimpleTable";
 import "./_style.scss"
 
 async function StatisticsContent() {
     const MainContent = /*html*/ `
         <div id="statistics-main-content">
-        <div>
-            <p>Game Time:</p>
-            <p>00:05:03</p>
-        </div>
-        <div>
-            <p>Rounds:</p>
-            <p>18</p>
-        </div>
-        <div>
-            <p>Hit Average:</p>
-            <p>...</p>
-        </div>
+            ${await SimpleTable(["Game Time", "00:00:00", "game-time"])}
+            ${await SimpleTable(["Rounds", "0", "rounds"])}
+            ${await SimpleTable(["Hit Average", "...", "hit-average"])}
         </div>
     `
 
