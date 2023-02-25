@@ -1,0 +1,63 @@
+// Colors and configs
+@import '../../style/main.scss';
+
+#card-game-over {
+    position: absolute;
+    top: 85px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: $white;
+    width: 352px;
+    height: 420px;
+    padding: 20px 40px;
+    border-radius: 10px;
+
+    header {
+        text-align: center;
+        margin-bottom: 20px;
+
+        .card-game-over__title {
+            color: $black;
+            font-size: 22px;
+        }
+    }
+
+    main {
+        .card-game-over__statistics-container {
+            margin-bottom: 40px;
+        }
+
+        .card-game-over__point-container {
+            text-align: center;
+            margin-bottom: 20px;
+
+            p {
+                color: $black;
+                font-weight: 700;
+            }
+
+            .card-game-over__point-value {
+                font-size: 50px;
+                font-weight: 500;
+            }
+        }
+    }
+
+    footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        button {
+            background: $purple;
+            width: 150px;
+            height: 40px;
+            padding: 5px;
+            border: none;
+            border-radius: 10px;
+        }
+    }
+}
