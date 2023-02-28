@@ -2,16 +2,35 @@
 @import '../../../style/main.scss';
 
 #statistics-main-content {
-    margin-bottom: 200px;
+    margin-bottom: 180px;
 }
 
 #statistics-footer-content {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
 
     button {
-        width: 60px;
-        color: $black;
+        background: none;
+        background-repeat: no-repeat;
+        background-position: center;
+        border: none;
+        cursor: pointer;
+
+        width: 24px;
+        height: 24px;
+        padding: 30px;
+    }
+
+    .statistics__btn-github {
+        background-image: url("../../../img/github.svg");
+    }
+
+    .statistics__btn-linkedin {
+        background-image: url("../../../img/linkedin.svg");
+    }
+
+    .statistics__btn-instagram {
+        background-image: url("../../../img/instagram.svg");
     }
 }
