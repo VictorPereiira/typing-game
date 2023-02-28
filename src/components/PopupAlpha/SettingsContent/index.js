@@ -12,8 +12,8 @@ async function SettingsContent() {
 
     const FooterContent = /*html*/ `
         <div id="setting-footer-content">
-            <button>New Game</button>
-            <button>Save</button>
+            <button value="newgame">New Game</button>
+            <button value="save">Save</button>
         </div>
     `
 

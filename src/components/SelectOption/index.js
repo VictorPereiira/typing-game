@@ -1,11 +1,17 @@
 // import { $ } from "../../utils/snippets";
+import get_data from "../../database/get_data";
 import "./_style.scss";
 
 async function SelectOption(label, options) {
     let OptionValues = ''
+    const data = await get_data()
     options.forEach(value => {
         let text = value[0].toUpperCase() + value.slice(1)
-        OptionValues += /*html*/ `<option value="${value}">${text}</option>`
+        if (value === data[label.toLowerCase()]) {
+            OptionValues += /*html*/ `<option value="${value}" selected>${text}</option>`
+        } else {
+            OptionValues += /*html*/ `<option value="${value}">${text}</option>`
+        }
     });
 
     return /*html*/ `
@@ -14,7 +20,7 @@ async function SelectOption(label, options) {
                 <p>${label}</p>
             </section>
             <section>
-                <select>
+                <select class="select-option__${label}">
                     ${OptionValues}
                 </select>
             </section>

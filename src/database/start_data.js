@@ -3,8 +3,8 @@ async function init_db() {
         "gameTime": "00:00:00",
         "rounds": "0",
         "hitAverage": "0%",
-        "language": "en         ",
-        "diffiulty": "medium",
+        "language": "en",
+        "difficulty": "medium",
     }
 
     if (!localStorage.getItem("typingGame")) {

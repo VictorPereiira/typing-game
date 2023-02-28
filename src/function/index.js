@@ -2,6 +2,7 @@ import { $, $$ } from "../utils/snippets";
 import Menu from "../components/Menu";
 import CardDefault from "../components/PopupAlpha/CardDefault";
 import CardGameOver from "../components/PopupBetha";
+import get_data from "../database/get_data";
 
 async function activeButtonsFun() {
     // const addClass = (text) => btn.classList.add(`check_${text}`)
@@ -30,7 +31,7 @@ async function activeButtonsFun() {
                         break;
                     case "settings":
                         document.body.insertAdjacentHTML('beforeend', await CardDefault("settings"))
-                        await closeCardDefault()
+                        await settings()
                         break;
                 }
             })
@@ -61,6 +62,25 @@ async function activeButtonsFun() {
         })
     }
 
+
+    // Settings
+    async function settings() {
+        await closeCardDefault()
+        $$("#setting-footer-content button").forEach(async (btn) => {
+            btn.addEventListener("click", setSelectValue)
+        })
+    }
+
+    async function setSelectValue() {
+        const data = await get_data()
+        $$("#setting-main-content #select-option select").forEach((select, idx) => {
+            idx === 0 ? data.language = select.value : data.difficulty = select.value
+        })
+
+        localStorage.setItem("typingGame", JSON.stringify(data))
+        $("#card-default").remove()
+        $("#home").classList.remove("blur")
+    }
 }
 
 
