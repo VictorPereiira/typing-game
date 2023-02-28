@@ -1,4 +1,5 @@
 import App from "./src/App.js";
+import activeButtonsFun from "./src/function/index.js";
 
 // const typedWordsHG = document.getElementById("typedWords")
 // const timeHG = document.getElementById("time")
@@ -11,6 +12,7 @@ import App from "./src/App.js";
 
 (async () => {
     await App();
+    await activeButtonsFun();
 })()
 
 // async function _init_() {

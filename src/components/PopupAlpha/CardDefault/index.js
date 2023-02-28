@@ -12,7 +12,7 @@ async function CardDefault(content) {
         <div id="card-default">
             <header>
                 <h3 class="card-default__title">${title}</h3>
-                <button>x</button>
+                <button class="card-default__button-close">x</button>
             </header>
             <main class="main-content">
                 ${MainContent}

@@ -36,7 +36,17 @@
 
             .header__icon-time {}
 
-            .header__button {}
+            .header__button {
+                background: none;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-image: url("../../img/menu-icon.svg");
+
+                width: 30px;
+                height: 30px;
+                border: none;
+                cursor: pointer;
+            }
         }
     }
 
@@ -77,7 +87,7 @@
         }
 
         .main__button {
-            background: #491BC7;
+            background: $purple;
             width: 140px;
             height: 37px;
             padding: 10px;

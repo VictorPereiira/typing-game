@@ -13,9 +13,9 @@ async function StatisticsContent() {
 
     const FooterContent = /*html*/ `
         <div id="statistics-footer-content">
-            <button>Github</button>
-            <button>Linkedin</button>
-            <button>Instagram</button>
+            <button class="statistics__btn-github"></button>
+            <button class="statistics__btn-linkedin"></button>
+            <button class="statistics__btn-instagran"></button>
        </div>
     `
 
