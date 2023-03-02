@@ -86,8 +86,12 @@
             font-weight: 500;
         }
 
+        .main__input::placeholder {
+            color: $grayII;
+        }
+
         .main__button {
-            background: $purpleIII;
+            background: $purpleII;
             width: 140px;
             height: 40px;
             padding: 10px;

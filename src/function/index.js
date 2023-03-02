@@ -8,6 +8,7 @@ async function activeButtonsFun() {
     // const addClass = (text) => btn.classList.add(`check_${text}`)
     // const removeClass = () => btn.classList.remove(btn.classList.value)
 
+
     // Menu
     $("#home .header__button").addEventListener("click", async () => {
         if (!$("#menu")) {
@@ -80,6 +81,33 @@ async function activeButtonsFun() {
         localStorage.setItem("typingGame", JSON.stringify(data))
         $("#card-default").remove()
         $("#home").classList.remove("blur")
+    }
+
+
+    // Time
+    let time_interval = null
+    $("#home .main__button").addEventListener("click", async () => {
+        $("#menu") ? $("#menu").remove() : true;
+        const { speedTime } = await get_data()
+        $("#home .main__button").remove()
+        time_interval = setInterval(updateClock, +speedTime)
+    })
+
+    async function updateClock() {
+        // if (pause) return
+        const time = Number($(".header__time").innerText.slice(0, -1))
+        if (time > 0) {
+            $(".header__time").innerText = `${time - 1}s`
+        } else {
+            clearInterval(time_interval)
+            await gameOver()
+        }
+    }
+
+
+    async function gameOver() {
+        $("#home").classList.add('blur');
+        document.body.insertAdjacentHTML('beforeend', await CardGameOver())
     }
 }
 
