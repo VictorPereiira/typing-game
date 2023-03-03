@@ -2,38 +2,10 @@ import { $, $$ } from "../utils/snippets";
 import { Menu, MenuJS } from "../components/Menu";
 import get_data from "../database/get_data";
 
+
 async function activeButtonsFun() {
     // Menu
     await MenuJS()
-
-
-    // // Settings
-    // async function settings() {
-    //     await closeCardDefault()
-    //     $$("#setting-footer-content button").forEach(async (btn) => {
-    //         btn.addEventListener("click", setSelectValue)
-    //     })
-    // }
-
-    // async function setSelectValue() {
-    //     const data = await get_data()
-    //     $$("#setting-main-content #select-option select").forEach((select, idx) => {
-    //         if (idx === 0) {
-    //             data.language = select.value
-    //         } else {
-    //             data.difficulty = select.value
-
-    //             // if (speedTime === 1000)
-    //             // if (speedTime === 600)
-    //             // if (speedTime === 300)
-    //         }
-    //     })
-
-    //     localStorage.setItem("typingGame", JSON.stringify(data))
-    //     $("#card-default").remove()
-    //     $("#home").classList.remove("blur")
-    // }
-
 
     // // Time
     // let time_interval = null

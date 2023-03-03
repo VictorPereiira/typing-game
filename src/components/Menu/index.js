@@ -1,4 +1,5 @@
 import { $, $$ } from "../../utils/snippets";
+import { Settings, SettingsJS } from "../Settings";
 import { Statistics, StatisticsJS } from "../Statistics";
 import "./_style.scss";
 
@@ -34,10 +35,10 @@ async function MenuJS() {
                         document.body.insertAdjacentHTML('beforeend', await Statistics())
                         await StatisticsJS()
                     },
-                    // "settings": async () => {
-                    //     document.body.insertAdjacentHTML('beforeend', await MenuOption("settings"))
-                    //     await settings()
-                    // }
+                    "settings": async () => {
+                        document.body.insertAdjacentHTML('beforeend', await Settings())
+                        await SettingsJS()
+                    }
                 }
 
                 await fun[btn.value]()
