@@ -1,5 +1,5 @@
 import { $, $$ } from "../utils/snippets";
-import Menu from "../components/Menu";
+import { Menu, MenuJS } from "../components/Menu";
 import CardDefault from "../components/PopupAlpha/CardDefault";
 import CardGameOver from "../components/PopupBetha";
 import get_data from "../database/get_data";
@@ -8,37 +8,8 @@ async function activeButtonsFun() {
     // const addClass = (text) => btn.classList.add(`check_${text}`)
     // const removeClass = () => btn.classList.remove(btn.classList.value)
 
-
     // Menu
-    $("#home .header__button").addEventListener("click", async () => {
-        if (!$("#menu")) {
-            $(".header__actions").insertAdjacentHTML('beforeend', await Menu())
-            await menuClickFun()
-        } else {
-            $("#menu").remove()
-        }
-    })
-
-    async function menuClickFun() {
-        $$("#menu button").forEach(btn => {
-            btn.addEventListener("click", async () => {
-                $("#menu").remove()
-                $("#home").classList.add('blur');
-
-                switch (btn.value) {
-                    case "statistics":
-                        document.body.insertAdjacentHTML('beforeend', await CardDefault("statistics"))
-                        await statistics()
-                        break;
-                    case "settings":
-                        document.body.insertAdjacentHTML('beforeend', await CardDefault("settings"))
-                        await settings()
-                        break;
-                }
-            })
-        });
-    }
-
+    await MenuJS()
     async function closeCardDefault() {
         $(".card-default__button-close").addEventListener("click", async () => {
             $("#card-default").remove()
@@ -75,7 +46,15 @@ async function activeButtonsFun() {
     async function setSelectValue() {
         const data = await get_data()
         $$("#setting-main-content #select-option select").forEach((select, idx) => {
-            idx === 0 ? data.language = select.value : data.difficulty = select.value
+            if (idx === 0) {
+                data.language = select.value
+            } else {
+                data.difficulty = select.value
+
+                // if (speedTime === 1000)
+                // if (speedTime === 600)
+                // if (speedTime === 300)
+            }
         })
 
         localStorage.setItem("typingGame", JSON.stringify(data))

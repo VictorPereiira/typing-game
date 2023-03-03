@@ -73,7 +73,6 @@ function draw(drw) {
         ['Hit Average'], ['Time ran out'], ['Time Played'],
         ['Error Rate'], ['Difficulty'], ['Typed Words'],
         ['Points'], ['Main Menu'], ['Play Again']
-
     ]
 
     if (lang === 1) text = [
