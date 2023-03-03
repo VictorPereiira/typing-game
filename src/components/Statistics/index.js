@@ -1,18 +1,17 @@
-// import { $ } from "../../utils/snippets";
-import get_data from "../../database/get_data";
 import { $$ } from "../../utils/snippets";
-import SimpleTable from "../SimpleTable";
+import get_data from "../../database/get_data";
 import "./_style.scss"
+import"../../wapper/CardDefault/_style.scss"
+
+import { CardDefault, CardDefaultJS } from "../../wapper/CardDefault";
+import SimpleTable from "../SimpleTable";
 
 async function Statistics() {
     const { gameTime, rounds, hitAverage } = await get_data()
 
     return /*html*/ `
-        <div id="statistics">
-            <header>
-                <h3 class="title">Statistics</h3>
-                <button class="button-close">x</button>
-            </header>
+        <div id="statistics" class="card-default">
+            ${await CardDefault("Statistics")}
             <main id="statistics-main-content">
                 ${await SimpleTable(["Game Time", gameTime, , "game-time"])}
                 ${await SimpleTable(["Rounds", rounds, "rounds"])}
@@ -28,7 +27,8 @@ async function Statistics() {
 }
 
 async function StatisticsJS() {
-    $$("#statistics button").forEach(btn => {
+    await CardDefaultJS()
+    $$("#statistics-footer-content button").forEach(btn => {
         btn.addEventListener("click", () => {
             const box = {
                 github: () => open("https://github.com/VictorPereiira", "_black"),
