@@ -1,6 +1,6 @@
 // import { $ } from "../../utils/snippets";
 import "./_style.scss";
-import SelectOption from "../../SelectOption";
+import SelectOption from "../SelectOption";
 
 async function SettingsContent() {
     const MainContent = /*html*/ `

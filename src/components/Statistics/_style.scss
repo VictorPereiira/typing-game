@@ -1,7 +1,7 @@
 // Colors and configs
-@import '../../../style/main.scss';
+@import '../../style/main.scss';
 
-#card-default {
+#statistics {
     position: absolute;
     top: 85px;
     left: 50%;
@@ -20,7 +20,7 @@
         margin-bottom: 40px;
         border-bottom: 2px solid $grayII;
 
-        .card-default__title {
+        .title {
             color: $black;
             font-size: 22px;
             font-weight: 500;
@@ -39,6 +39,40 @@
             color: $black;
             font-size: 20px;
             font-weight: 700;
+        }
+    }
+
+    main {
+        margin-bottom: 180px;
+    }
+
+    footer {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+
+        button {
+            background: none;
+            background-repeat: no-repeat;
+            background-position: center;
+            border: none;
+            cursor: pointer;
+
+            width: 24px;
+            height: 24px;
+            padding: 30px;
+        }
+
+        .statistics__btn-github {
+            background-image: url("../../img/github.svg");
+        }
+
+        .statistics__btn-linkedin {
+            background-image: url("../../img/linkedin.svg");
+        }
+
+        .statistics__btn-instagram {
+            background-image: url("../../img/instagram.svg");
         }
     }
 }

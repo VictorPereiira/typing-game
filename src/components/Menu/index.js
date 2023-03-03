@@ -1,4 +1,5 @@
 import { $, $$ } from "../../utils/snippets";
+import { Statistics, StatisticsJS } from "../Statistics";
 import "./_style.scss";
 
 async function Menu() {
@@ -30,13 +31,13 @@ async function MenuJS() {
 
                 const fun = {
                     "statistics": async () => {
-                        document.body.insertAdjacentHTML('beforeend', await CardDefault("statistics"))
-                        await statistics()
+                        document.body.insertAdjacentHTML('beforeend', await Statistics())
+                        await StatisticsJS()
                     },
-                    "settings": async () => {
-                        document.body.insertAdjacentHTML('beforeend', await CardDefault("settings"))
-                        await settings()
-                    }
+                    // "settings": async () => {
+                    //     document.body.insertAdjacentHTML('beforeend', await MenuOption("settings"))
+                    //     await settings()
+                    // }
                 }
 
                 await fun[btn.value]()

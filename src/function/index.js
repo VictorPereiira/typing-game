@@ -1,7 +1,5 @@
 import { $, $$ } from "../utils/snippets";
 import { Menu, MenuJS } from "../components/Menu";
-import CardDefault from "../components/PopupAlpha/CardDefault";
-import CardGameOver from "../components/PopupBetha";
 import get_data from "../database/get_data";
 
 async function activeButtonsFun() {
@@ -10,29 +8,6 @@ async function activeButtonsFun() {
 
     // Menu
     await MenuJS()
-    async function closeCardDefault() {
-        $(".card-default__button-close").addEventListener("click", async () => {
-            $("#card-default").remove()
-            $("#home").classList.remove("blur")
-        })
-    }
-
-
-    // Statistics Popup
-    async function statistics() {
-        await closeCardDefault()
-        $$("#statistics-footer-content button").forEach(btn => {
-            btn.addEventListener("click", () => {
-                const box = {
-                    github: () => open("https://github.com/VictorPereiira", "_black"),
-                    linkedin: () => open("https://www.linkedin.com/in/victorpereiira/", "_black"),
-                    instagram: () => open("https://www.instagram.com/_victorpereiira/", "_black"),
-                }
-
-                box[btn.value]()
-            })
-        })
-    }
 
 
     // Settings
