@@ -28,7 +28,7 @@ async function SettingsJS() {
         btn.addEventListener("click", async () => {
             const data = await get_data()
             $$("#settings-main-content #select-option select").forEach((select, idx) => {
-                const { value } = select
+                let value = (select.value).toLowerCase()
                 idx === 0 ? data.language = value : data.difficulty = value;
             })
 
