@@ -1,7 +1,9 @@
 import { $, $$ } from "../../utils/snippets";
+import "./_style.scss";
+
 import { Settings, SettingsJS } from "../Settings";
 import { Statistics, StatisticsJS } from "../Statistics";
-import "./_style.scss";
+import { pause_time, unpause_time } from "../Time";
 
 async function Menu() {
     return /*html*/ `
@@ -16,9 +18,11 @@ async function MenuJS() {
     // Menu
     $("#home .header__button").addEventListener("click", async () => {
         if (!$("#menu")) {
+            await pause_time()
             $(".header__actions").insertAdjacentHTML('beforeend', await Menu())
             await options__click_fun()
         } else {
+            await unpause_time()
             $("#menu").remove()
         }
     })
