@@ -1,0 +1,26 @@
+// Colors and configs
+@import '../../style/main.scss';
+
+// Style
+#btn-start-game {
+    background: $purpleII;
+    width: 140px;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease-out;
+    margin: 0 auto;
+
+    color: $white;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    box-shadow: 0 4px 4px rgb(0 0 0 / 40%);
+}
+
+
+#btn-start-game:hover {
+    background: $purpleIII;
+}

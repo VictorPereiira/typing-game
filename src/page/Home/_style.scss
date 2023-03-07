@@ -29,13 +29,6 @@
             gap: 10px;
             align-items: center;
 
-            .header__time {
-                font-size: 25px;
-                font-weight: 500;
-            }
-
-            .header__icon-time {}
-
             .header__button {
                 background: none;
                 background-repeat: no-repeat;
@@ -88,24 +81,6 @@
 
         .main__input::placeholder {
             color: $grayII;
-        }
-
-        .main__button {
-            background: $purpleII;
-            width: 140px;
-            height: 40px;
-            padding: 10px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s ease-out;
-            margin: 0 auto;
-
-            color: $white;
-            font-weight: 700;
-            text-transform: uppercase;
-
-            box-shadow: 0 4px 4px rgb(0 0 0 / 40%);
         }
     }
 
