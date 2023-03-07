@@ -6,11 +6,11 @@ async function SelectOption(label, options) {
     let OptionValues = ''
     const data = await get_data()
     options.forEach(value => {
-        let text = value[0].toUpperCase() + value.slice(1)
-        if (value === data[label.toLowerCase()]) {
-            OptionValues += /*html*/ `<option value="${value}" selected>${text}</option>`
+        let text = value.toLowerCase()
+        if (text === data[label.toLowerCase()]) {
+            OptionValues += /*html*/ `<option value="${value}" selected>${value}</option>`
         } else {
-            OptionValues += /*html*/ `<option value="${value}">${text}</option>`
+            OptionValues += /*html*/ `<option value="${value}">${value}</option>`
         }
     });
 
