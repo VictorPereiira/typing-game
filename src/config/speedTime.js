@@ -1,5 +1,5 @@
 export const speedTime = {
-    "medium": "100",
+    "medium": "1000",
     "hard": "600",
     "expert": "300"
 }

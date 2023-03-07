@@ -4,8 +4,7 @@ async function init_db() {
         "rounds": "0",
         "hitAverage": "0%",
         "language": "en",
-        "difficulty": "medium",
-        "speedTime": "1000",
+        "difficulty": "medium"
     }
 
     if (!localStorage.getItem("typingGame")) {
