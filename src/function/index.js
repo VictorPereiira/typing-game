@@ -9,8 +9,6 @@ async function activeButtonsFun() {
     await BtnStartGameJS()
 
 
-
-
     // async function gameOver() {
     //     $("#home").classList.add('blur');
     //     document.body.insertAdjacentHTML('beforeend', await CardGameOver())

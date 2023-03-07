@@ -1,7 +1,7 @@
 // Colors and configs
 @import '../../style/main.scss';
 
-#card-game-over {
+#game-over {
     position: absolute;
     top: 85px;
     left: 50%;
@@ -17,18 +17,18 @@
         text-align: center;
         margin-bottom: 20px;
 
-        .card-game-over__title {
+        .game-over__title {
             color: $black;
             font-size: 22px;
         }
     }
 
     main {
-        .card-game-over__statistics-container {
+        .game-over__statistics-container {
             margin-bottom: 40px;
         }
 
-        .card-game-over__point-container {
+        .game-over__point-container {
             text-align: center;
             margin-bottom: 20px;
 
@@ -37,7 +37,7 @@
                 font-weight: 700;
             }
 
-            .card-game-over__point-value {
+            .game-over__point-value {
                 font-size: 50px;
                 font-weight: 500;
             }
@@ -52,12 +52,22 @@
         gap: 10px;
 
         button {
-            background: $purple;
-            width: 150px;
+            background-color: $purple;
+            width: 140px;
             height: 40px;
-            padding: 5px;
             border: none;
             border-radius: 10px;
+            transition: 0.3s ease-out;
+            cursor: pointer;
+
+            font-size: 13.5px;
+            font-weight: 600;
+
+            box-shadow: 0 4px 4px rgb(0 0 0 / 40%);
+        }
+
+        button:hover {
+            background-color: $yellowII;
         }
     }
 }

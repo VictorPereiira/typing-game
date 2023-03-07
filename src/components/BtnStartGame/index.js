@@ -1,7 +1,7 @@
 import { $ } from "../../utils/snippets"
 import "./_style.scss"
 
-import { TimeJS, unpause_time } from "../Time"
+import { start_clock, TimeJS, unpause_time } from "../Time"
 
 async function BtnStartGame() {
     return /*html*/ `
@@ -16,6 +16,7 @@ async function BtnStartGameJS() {
         $("#btn-start-game").remove()
         await TimeJS()
         await unpause_time()
+        await start_clock()
     })
 }
 

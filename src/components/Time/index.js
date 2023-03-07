@@ -3,11 +3,12 @@ import "./_style.scss"
 
 import get_data from "../../database/get_data"
 import speedTime from "../../config/speedTime"
+import { GameOver, GameOverJS } from "../GameOver"
 
 async function Time() {
     return /*html*/ `
         <div id="time">
-            <p class="time-count">10s</p>
+            <p class="time-count">5s</p>
             <span class="time-icon"></span>
         </div>  
     `
@@ -28,7 +29,9 @@ async function TimeJS() {
             $("#time .time-count").innerText = `${time - 1}s`
         } else {
             clearInterval(time_interval)
-            // await gameOver()
+
+            $("body").insertAdjacentHTML('beforeend', await GameOver())
+            await GameOverJS()
         }
     }
 }
@@ -45,5 +48,21 @@ async function pause_time() {
     localStorage.setItem("typingGame", JSON.stringify(data))
 }
 
+async function start_clock() {
+    let count = 0
+    let time = setInterval(async () => {
+        const data = await get_data()
+        if (data.pause) return
 
-export { Time, TimeJS, unpause_time, pause_time }
+        if (!data.gameOver) {
+            count++
+        } else {
+            clearInterval(time)
+            data.timeRoundPlayed = count
+            localStorage.setItem("typingGame", JSON.stringify(data))
+        }
+    }, 1000)
+}
+
+
+export { Time, TimeJS, unpause_time, pause_time, start_clock }
