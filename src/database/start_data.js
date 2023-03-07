@@ -4,7 +4,7 @@ import get_data from "./get_data";
 async function init_db() {
     const start_values = {
         "gameTime": "00:00:00",
-        "timeRoundPlayed": 0,
+        "timeRoundPlayed": "00:00:00",
         "rounds": "0",
         "hitAverage": "0%",
         "language": "en",

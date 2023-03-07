@@ -1,8 +1,14 @@
 import { $, $$ } from "../../utils/snippets";
 import "./_style.scss";
 
+import init_db from "../../database/start_data";
 import get_data from "../../database/get_data";
+
+import App from "../../App";
 import SimpleTable from "../SimpleTable";
+
+import activeButtonsFun from "../../function";
+import { format_seconds_to_time, format_time_in_seconds } from "../Time";
 
 async function GameOver() {
     const { difficulty, timeRoundPlayed } = await get_data()
@@ -35,8 +41,28 @@ async function GameOver() {
 async function GameOverJS() {
     $("#home").classList.add('blur');
 
-    $$(".game-over_footer button").forEach(btn => {
-        const { value } = btn
+    $$(".game-over_footer button").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+            const data = await get_data()
+            const gameTime = await format_time_in_seconds(data.gameTime)
+            const timeRoundPlayed = await format_time_in_seconds(data.timeRoundPlayed)
+            data.gameTime = await format_seconds_to_time(gameTime + timeRoundPlayed)
+            data.timeRoundPlayed = "00:00:00"
+            data.rounds = +data.rounds + 1
+            data.gameOver = false
+            localStorage.setItem("typingGame", JSON.stringify(data))
+
+            if (btn.value === "home") {
+                location.reload();
+            } {
+                $("body").innerHTML = ""
+                await init_db();
+                await App();
+                await activeButtonsFun();
+                $("#btn-start-game").click()
+            }
+
+        })
     });
 }
 

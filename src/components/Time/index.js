@@ -62,6 +62,13 @@ async function format_seconds_to_time(seconds) {
     return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }
 
+async function format_time_in_seconds(time) {
+    const [hours, minutes, seconds] = time.split(":");
+    const totalSeconds = (parseInt(hours) * 3600) + (parseInt(minutes) * 60) + parseInt(seconds);
+
+    return totalSeconds;
+}
+
 async function start_clock() {
     let count = 0
     let time = setInterval(async () => {
@@ -82,5 +89,9 @@ async function start_clock() {
 }
 
 
-
-export { Time, TimeJS, unpause_time, pause_time, start_clock, format_seconds_to_time }
+export {
+    start_clock,
+    Time, TimeJS,
+    unpause_time, pause_time,
+    format_seconds_to_time, format_time_in_seconds
+}
