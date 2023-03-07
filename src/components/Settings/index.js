@@ -2,6 +2,7 @@ import { $, $$ } from "../../utils/snippets";
 import get_data from "../../database/get_data";
 import "./_style.scss"
 
+import { unpause_time } from "../Time";
 import { CardDefault, CardDefaultJS } from "../../wapper/CardDefault";
 import SelectOption from "../SelectOption"
 
@@ -35,6 +36,7 @@ async function SettingsJS() {
             localStorage.setItem("typingGame", JSON.stringify(data))
             $(".card-default").remove()
             $("#home").classList.remove("blur")
+            await unpause_time()
         })
     })
 }

@@ -1,3 +1,4 @@
+import { unpause_time } from "../../components/Time"
 import { $ } from "../../utils/snippets"
 
 async function CardDefault(title = "Undefined") {
@@ -13,7 +14,8 @@ async function CardDefaultJS() {
     $(".card-default__button-close").addEventListener("click", async () => {
         $(".card-default").remove()
         $("#home").classList.remove("blur")
+        await unpause_time()
     })
 }
 
-export { CardDefault, CardDefaultJS}
+export { CardDefault, CardDefaultJS }

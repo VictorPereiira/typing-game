@@ -1,6 +1,9 @@
 import { $ } from "../../utils/snippets";
 import "./_style.scss";
 
+import { BtnStartGame } from "../../components/BtnStartGame";
+import { Time } from "../../components/Time";
+
 async function Home() {
     return /*html*/ `
         <div id="home">
@@ -9,10 +12,7 @@ async function Home() {
                     <h1>Typing Game</h1>
                 </section>
                 <section class="header__actions">
-                    <div>
-                        <p class="header__time">10<span class="header__meter-time">s<span></p>
-                        <span class="header__icon-time"></span>
-                    </div>  
+                    ${await Time()}
                     <button class="header__button"></button>
                 </section>
             </header>
@@ -23,7 +23,7 @@ async function Home() {
                     <span class="main__count-point">0</span>
                 </div>
                 <input class="main__input" type="text" placeholder="Write the word here!!!">
-                <button class="main__button">Start Game</button>
+                ${await BtnStartGame()}
             </main>
             <footer>
                 <p>Made by <a href="https://github.com/VictorPereiira" target="_blank">VictorPerreira</a></p>
