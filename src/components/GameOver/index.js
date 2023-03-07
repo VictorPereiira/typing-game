@@ -25,7 +25,7 @@ async function GameOver() {
                 </section>
             </main>
             <footer class="game-over_footer">
-                <button value="main-menu">MAIN MENU</button>
+                <button value="home">HOME</button>
                 <button value="play-again">PLAY AGAIN</button>
             </footer>
         </div>
