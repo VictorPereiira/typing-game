@@ -1,0 +1,26 @@
+// Colors and configs
+@import '../../style/main.scss';
+
+// Component
+#input {
+    margin-bottom: 30px;
+
+    input {
+        width: 400px;
+        height: 40px;
+        padding: 5px 0;
+        background: none;
+        outline: none;
+        border: 1px solid $white;
+        border-radius: 10px;
+
+        text-align: center;
+        color: $white;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    input::placeholder {
+        color: $grayII;
+    }
+}

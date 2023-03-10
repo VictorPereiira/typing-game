@@ -40,7 +40,6 @@ async function GameOver() {
 
 async function GameOverJS() {
     $("#home").classList.add('blur');
-
     $$(".game-over_footer button").forEach((btn) => {
         btn.addEventListener("click", async () => {
             const data = await get_data()

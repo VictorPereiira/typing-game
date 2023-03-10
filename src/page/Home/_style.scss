@@ -62,26 +62,6 @@
             margin-bottom: 75px;
             font-size: 30px;
         }
-
-        .main__input {
-            width: 400px;
-            height: 40px;
-            padding: 5px 0;
-            background: none;
-            outline: none;
-            border: 1px solid $white;
-            border-radius: 10px;
-            margin: 0 auto 30px auto;
-
-            text-align: center;
-            color: $white;
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        .main__input::placeholder {
-            color: $grayII;
-        }
     }
 
     footer {
