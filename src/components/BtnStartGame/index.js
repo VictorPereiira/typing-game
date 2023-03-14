@@ -13,8 +13,8 @@ async function BtnStartGame() {
 async function BtnStartGameJS() {
     $("#btn-start-game").addEventListener("click", async () => {
         if ($("#menu")) $("#menu").remove()
-
         $("#btn-start-game").remove()
+
         await InputJS()
         await TimeJS()
         await unpause_time()

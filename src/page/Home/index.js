@@ -4,6 +4,7 @@ import "./_style.scss";
 import { BtnStartGame } from "../../components/BtnStartGame";
 import { Time } from "../../components/Time";
 import { Input } from "../../components/Input";
+import { Point } from "../../components/Point";
 
 async function Home() {
     return /*html*/ `
@@ -19,12 +20,9 @@ async function Home() {
             </header>
             <main>
                 <h2 class="main__word">Happiness</h2>
-                <div  class="main__point">
-                    <span class="main__icon-point">.</span>
-                    <span class="main__count-point">0</span>
-                </div>
-               ${await Input()}
-               ${await BtnStartGame()}
+                ${await Point()}
+                ${await Input()}
+                ${await BtnStartGame()}
             </main>
             <footer>
                 <p>Made by <a href="https://github.com/VictorPereiira" target="_blank">VictorPerreira</a></p>
