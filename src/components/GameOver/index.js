@@ -3,6 +3,7 @@ import "./_style.scss";
 
 import init_db from "../../database/start_data";
 import get_data from "../../database/get_data";
+import temp_randow_word from "../../database/temp_random_word"
 
 import App from "../../App";
 import SimpleTable from "../SimpleTable";
@@ -53,8 +54,9 @@ async function GameOverJS() {
 
             if (btn.value === "home") {
                 location.reload();
-            } {
+            } else {
                 $("body").innerHTML = ""
+                temp_randow_word.splice(0, temp_randow_word.length);
                 await init_db();
                 await App();
                 await activeButtonsFun();

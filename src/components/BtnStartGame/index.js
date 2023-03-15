@@ -3,6 +3,7 @@ import "./_style.scss"
 
 import { start_clock, TimeJS, unpause_time } from "../Time"
 import { InputJS } from "../Input"
+import { WordJS } from "../Word"
 
 async function BtnStartGame() {
     return /*html*/ `
@@ -15,6 +16,7 @@ async function BtnStartGameJS() {
         if ($("#menu")) $("#menu").remove()
         $("#btn-start-game").remove()
 
+        await WordJS()
         await InputJS()
         await TimeJS()
         await unpause_time()

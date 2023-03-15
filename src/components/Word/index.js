@@ -12,12 +12,12 @@ async function Word() {
       <div id="word">
         <h2>${start_word}</h2>
       </div>
-    `
+  `
 }
 
 async function WordJS() {
   let randomNumber = 0
-  overall = words[0].length
+  let overall = words[0].length
   const point_count = +$(".point__count").innerText
 
   if (point_count === 0) {
@@ -29,7 +29,14 @@ async function WordJS() {
   }
 
   temp_randow_word.push(randomNumber)
-  word.innerHTML = words[0][randomNumber]
+  checkLengthBoxRadom()
+  $("#word h2").innerText = words[0][randomNumber]
+}
+
+function checkLengthBoxRadom() {
+  if (temp_randow_word.length === words[0].length) {
+    temp_randow_word.splice(0, temp_randow_word.length)
+  }
 }
 
 export { Word, WordJS };

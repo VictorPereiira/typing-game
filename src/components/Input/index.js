@@ -4,6 +4,7 @@ import "./_style.scss";
 import get_data from "../../database/get_data";
 import timeAdd from "../../config/timeAdd"
 import { update_point } from "../Point";
+import { WordJS } from "../Word";
 
 async function Input() {
   return /*html*/ `
@@ -14,47 +15,25 @@ async function Input() {
 }
 
 async function InputJS() {
-  let typedWords = 0
-  $("#input input").disabled = false
-  $("#input").addEventListener('input', async (e) => {
+  const $input = $("#input input")
+  $input.disabled = false
+  $input.focus()
+  $input.addEventListener('input', async (e) => {
     const insertedText = (e.target.value).toLowerCase()
     const { difficulty } = await get_data()
-    let randomWord = "s"
+    let randomWord = $("#word h2").innerText
 
     if (insertedText === randomWord) {
-      // turn++
       await update_point()
-      // checkLengthBoxRadom()
-      // wordToDOM()
-      // $("#input").placeholder = ' '
+      await WordJS()
       e.target.value = ''
+      e.target.placeholder = ''
+
       const time = $("#time .time-count").innerText.slice(0, -1)
       const time_now = Number(time) + Number(timeAdd[difficulty])
       $("#time .time-count").innerText = `${time_now}s`
     }
   })
-
-  // function checkLengthBoxRadom() {
-  //   if (boxRandom.length === words[lang].length) boxRandom.splice(0, Number.MAX_VALUE)
-  // }
-
-
-  // function wordToDOM() {
-  //   overall = words[lang].length
-
-  //   if (turn < 1) {
-  //     randomNumber = Math.floor(Math.random() * overall)
-  //   } else {
-  //     while (boxRandom.indexOf(randomNumber) > -1) { // exists randomNumber repeats
-  //       randomNumber = Math.floor(Math.random() * overall)
-  //     }
-  //   }
-
-  //   randomWord = words[lang][randomNumber]
-  //   boxRandom.push(randomNumber)
-  //   word.innerHTML = randomWord
-  // }
-
 }
 
 export { Input, InputJS };
