@@ -5,6 +5,7 @@ import { BtnStartGame } from "../../components/BtnStartGame";
 import { Time } from "../../components/Time";
 import { Input } from "../../components/Input";
 import { Point } from "../../components/Point";
+import { Word } from "../../components/Word";
 
 async function Home() {
     return /*html*/ `
@@ -19,7 +20,7 @@ async function Home() {
                 </section>
             </header>
             <main>
-                <h2 class="main__word">Happiness</h2>
+                ${await Word()}
                 ${await Point()}
                 ${await Input()}
                 ${await BtnStartGame()}
