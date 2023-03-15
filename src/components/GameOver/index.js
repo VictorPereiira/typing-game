@@ -13,6 +13,7 @@ import { format_seconds_to_time, format_time_in_seconds } from "../Time";
 
 async function GameOver() {
     const { difficulty, timeRoundPlayed } = await get_data()
+    const point_count = $(".point__count").innerText
 
     return /*html*/ `
         <div id="game-over">
@@ -24,7 +25,7 @@ async function GameOver() {
                     ${await SimpleTable(["Time Played", timeRoundPlayed, "time-played"])}
                     ${await SimpleTable(["Error Rate", "...", "error-rate"])}
                     ${await SimpleTable(["Difficulty", difficulty, "difficulty"])}
-                    ${await SimpleTable(["Typed Words", "0", "typed-words"])}
+                    ${await SimpleTable(["Typed Words", point_count, "typed-words"])}
                 </section>
                 <section class="game-over__point-container">
                     <p class="game-over__point-title">Points:</p>
