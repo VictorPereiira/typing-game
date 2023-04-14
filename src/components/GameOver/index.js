@@ -56,16 +56,20 @@ async function GameOverJS() {
             if (btn.value === "home") {
                 location.reload();
             } else {
-                $("body").innerHTML = ""
-                temp_randow_word.splice(0, temp_randow_word.length);
-                await init_db();
-                await App();
-                await activeButtonsFun();
-                $("#btn-start-game").click()
+                await reset_game()
             }
 
         })
     });
 }
 
-export { GameOver, GameOverJS };
+async function reset_game() {
+    $("body").innerHTML = ""
+    temp_randow_word.splice(0, temp_randow_word.length);
+    await init_db();
+    await App();
+    await activeButtonsFun();
+    $("#btn-start-game").click()
+}
+
+export { GameOver, GameOverJS, reset_game };

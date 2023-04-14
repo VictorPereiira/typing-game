@@ -5,6 +5,7 @@ import "./_style.scss"
 import { unpause_time } from "../Time";
 import { CardDefault, CardDefaultJS } from "../../wapper/CardDefault";
 import SelectOption from "../SelectOption"
+import { reset_game } from "../GameOver";
 
 
 async function Settings() {
@@ -34,9 +35,13 @@ async function SettingsJS() {
             })
 
             localStorage.setItem("typingGame", JSON.stringify(data))
-            $(".card-default").remove()
-            $("#home").classList.remove("blur")
-            await unpause_time()
+            if (btn.value === "newgame") {
+                await reset_game()
+            } else {
+                $(".card-default").remove()
+                $("#home").classList.remove("blur")
+                await unpause_time()
+            }
         })
     })
 }
