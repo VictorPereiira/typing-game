@@ -10,7 +10,6 @@
     <a href="#about">About</a>   |
     <a href="#features">Features</a>   |
     <!-- <a href="#technologies">Technologies</a>   | -->
-    <a href="#layout">Layout</a>   |
     <a href="#howToUse">How to use</a>   |
     <a href="#howToContribute">How to contribute</a>   |
     <a href="#license">License</a> 
@@ -18,13 +17,19 @@
 
 <p align = "center"><img height = '400' src = "https://user-images.githubusercontent.com/64560823/127571876-967811e4-8686-45b2-8140-f35f76dbc58e.gif")
 ><p>  
+<div class="video-container">
+  <video width="400" height="400" controls>
+    <source src="nome-do-arquivo-de-video.mp4" type="video/mp4">
+    Seu navegador não suporta a tag de vídeo.
+  </video>
+</div>
 
 <div align="center">
     Translate for 
     <a href="./github/readme_pt_br.md">PT-BR</a> 
 </div>
 
- > 🎮 Project  Access : [Live Demo](https://victorpereiira.github.io/typing-game/public/index.html) 
+ > 🎮 Project  Access : [Live Demo](https://victorpereiira.com/typing-game/) 
 
  > 📄 Project Planner: [Kanban](https://github.com/users/VictorPereiira/projects/4)
 
@@ -48,10 +53,6 @@
   
 <!-- ## Technologies
 - [Vanilla JS](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript) -->
-  
-## Layout
-<img src = "./github/game.svg">
-<img src = "./github/popup.svg">
 
 
 <h2 id="howToUse">How to use</h2>
