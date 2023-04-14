@@ -1,0 +1,34 @@
+@import '../../style/main.scss';
+
+#settings {
+    main {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 120px;
+    }
+
+    footer {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            background-color: $purple;
+            width: 140px;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background-color: $yellowII;
+        }
+    }
+}

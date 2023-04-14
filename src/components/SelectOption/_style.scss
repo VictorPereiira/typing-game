@@ -1,0 +1,33 @@
+// Colors and configs
+@import '../../style/main.scss';
+
+#select-option {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+
+    p {
+        color: $grayI;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    section {
+        width: 100px;
+    }
+
+    select {
+        width: 100%;
+        padding: 5px;
+        border: 2px solid $grayII;
+        border-radius: 5px;
+        cursor: pointer;
+
+        color: $grayI;
+        font-weight: 700;
+
+        option {
+            color: $grayI;
+        }
+    }
+}

@@ -1,0 +1,13 @@
+// Colors and configs
+@import "../../style/main.scss";
+
+.simple-table {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+
+    p {
+        color: $black;
+        font-weight: 700;
+    }
+}

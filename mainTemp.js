@@ -1,12 +1,14 @@
-const typedWordsHG = document.getElementById("typedWords"),
-    timeHG = document.getElementById("time"),
-    word = document.querySelector(".word"),
-    input = document.querySelector(".input"),
-    drawingArea = document.querySelector(".drawingArea"),
-    settingsIcon = document.querySelector("#settings-icon"),
-    container = document.querySelector(".container"),
-    blurArea = document.querySelector("#blur")
+// DOM Select
+const typedWordsHG = document.getElementById("typedWords")
+const timeHG = document.getElementById("time")
+const word = document.querySelector(".word")
+const input = document.querySelector(".input")
+const drawingArea = document.querySelector(".drawingArea")
+const settingsIcon = document.querySelector("#settings-icon")
+const container = document.querySelector(".container")
+const blurArea = document.querySelector("#blur")
 
+// Database
 const words = [
     [
         'sigh', 'tense', 'airplane', 'ball', 'pies',
@@ -22,15 +24,16 @@ const words = [
     ]
 ]
 
-let boxRandom = [], randomWord,
-    timeInterval, speedTime, lang,
-    endGame = false, pause = false,
-    turn = 0, time = 10
+// Enviroment Variabless
+let boxRandom = [], randomWord
+let timeInterval, speedTime, lang
+let endGame = false, pause = false
+let turn = 0, time = 10
 
-let gameTime = 0, gameTimeFormat = '00:00:00',
-    rounds = 0, hitAverage = 0,
-    typedWords = 0, difficultyLevel, points = 0,
-    timePlayed = 0, timePlayedInt, timePlayedFormat
+let gameTime = 0, gameTimeFormat = '00:00:00'
+let rounds = 0, hitAverage = 0
+let typedWords = 0, difficultyLevel, points = 0
+let timePlayed = 0, timePlayedInt, timePlayedFormat
 
 
 // check conditional
@@ -54,11 +57,11 @@ if (localStorage.getItem('speedTime') !== null) {
     speedTime = 600
 }
 
-
 // start ui
 drawingArea.innerHTML = draw(0)
 input.disabled = true
 
+// Create draw
 function draw(drw) {
     let text
 
@@ -70,7 +73,6 @@ function draw(drw) {
         ['Hit Average'], ['Time ran out'], ['Time Played'],
         ['Error Rate'], ['Difficulty'], ['Typed Words'],
         ['Points'], ['Main Menu'], ['Play Again']
-
     ]
 
     if (lang === 1) text = [
@@ -323,8 +325,9 @@ function timePlayedUp() {
 }
 
 function setTimeFormat(timeValue) {
-    let timeFormatted,
-        minutes, seconds
+    let timeFormatted = ""
+    let minutes = ""
+    let seconds = ""
 
     if (timeValue <= 60) {
         if (timeValue < 10) timeFormatted = `00:00:0${timeValue}`

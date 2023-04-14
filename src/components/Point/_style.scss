@@ -1,0 +1,26 @@
+// Colors and configs
+@import '../../style/main.scss';
+
+// Component
+#point {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    margin-bottom: 65px;
+
+    .point__icon {
+        background: none;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url("../../img/point-icon.svg");
+
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .point__count {
+        font-size: 30px;
+    }
+}
